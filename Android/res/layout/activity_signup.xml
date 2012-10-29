@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.hyvee.android"
+	style="@style/MainWindow">
+
+	<ScrollView 
+		android:id="@+id/scroll"
+		style="@style/ScrollContent">
+
+		<LinearLayout 
+			style="@style/LinearLayoutWrap">
+			
+		    <LinearLayout style="@style/LinearLayoutContent">
+		        
+		        
+		        <TextView 
+		            style="@style/TextViewTitle"
+		            android:layout_marginTop="15dp"
+		            android:text="@string/signup_create_gfx_account"/>
+		        
+		        <!-- Username Field -->
+		        <TextView
+			        style="@style/TextViewTitleSub"
+			        android:text="@string/signup_email"/>
+		    
+		        
+		        <FrameLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content">
+		            
+			        <EditText
+			            android:id="@+id/signup_field_username" 
+			            style="@style/EditTextDefault"
+			            android:inputType="textEmailAddress"/>
+			        
+			        <TextView 
+			            android:id="@+id/signup_email_error"
+			            android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="10dp"
+				        android:layout_gravity="right|center_vertical"
+				        android:gravity="right|center_vertical"
+				        android:text="@string/signup_invalid"
+				        android:textColor="@color/red_pale"
+				        android:textSize="13dp"
+				        android:visibility="gone"/>
+				</FrameLayout>
+				
+		        
+		        
+		        <!-- Reenter Username Field -->
+		        <TextView
+			        style="@style/TextViewTitleSub"
+			        android:text="@string/signup_reenter_email"/>
+		    
+		        
+		        <FrameLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content">
+		            
+			        <EditText
+			            android:id="@+id/signup_field_reenter_email" 
+			            style="@style/EditTextDefault"
+			            android:inputType="textEmailAddress"/>
+			        
+			        <TextView 
+			            android:id="@+id/signup_reenter_email_error"
+			            android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="10dp"
+				        android:layout_gravity="right|center_vertical"
+				        android:gravity="right|center_vertical"
+				        android:text="@string/signup_invalid"
+				        android:textColor="@color/red_pale"
+				        android:textSize="13dp"
+				        android:visibility="gone"/>
+				</FrameLayout>
+		        
+		        <!--  Password Field -->
+		        <TextView
+			        style="@style/TextViewTitleSub"
+			        android:text="@string/signup_password"
+			        android:layout_marginTop="15dp"/>
+		        
+		        <FrameLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content">
+		            
+			        <EditText
+			            android:id="@+id/signup_field_password"
+			            style="@style/EditTextDefault"
+			            android:inputType="textPassword"/>
+			        
+			        <TextView
+			            android:id="@+id/signup_password_error"
+			            android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="10dp"
+				        android:layout_gravity="right|center_vertical"
+				        android:gravity="right|center_vertical"
+				        android:text="@string/signup_invalid"
+				        android:textColor="@color/red_pale"
+				        android:textSize="13dp"
+				        android:visibility="gone"/>
+				</FrameLayout>
+		        
+		        
+		        <!--  Reenter Password Field -->
+		        <TextView
+			        style="@style/TextViewTitleSub"
+			        android:text="@string/signup_reenter_password"/>
+		        
+		        <FrameLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content">
+		            
+			        <EditText
+			            android:id="@+id/signup_field_reenter_password"
+			            style="@style/EditTextDefault"
+			            android:inputType="textPassword"/>
+			        
+			        <TextView
+			            android:id="@+id/signup_reenter_password_error"
+			            android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="10dp"
+				        android:layout_gravity="right|center_vertical"
+				        android:gravity="right|center_vertical"
+				        android:text="@string/signup_invalid"
+				        android:textColor="@color/red_pale"
+				        android:textSize="13dp"
+				        android:visibility="gone"/>
+				</FrameLayout>
+		            
+	            <TextView
+	                style="@style/Widget.Button.Blue"
+			        android:layout_width="100dp"
+			        android:layout_height="40dp"
+			        android:layout_gravity="right|center_vertical"
+			        android:layout_marginTop="15dp"
+			        android:layout_marginRight="10dp"
+			        android:textSize="15dp"
+			        android:text="@string/signup_create_account_button"
+			        android:onClick="signUpButtonClicked"/>
+		        
+		    </LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+
+	<!-- header -->
+	<include layout="@layout/include_header" android:id="@+id/header" />
+
+
+</FrameLayout>

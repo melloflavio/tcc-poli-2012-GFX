@@ -1,0 +1,96 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+    
+    <style name="MainWindow">
+        <item name="android:orientation">vertical</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:background">@color/white</item>
+    </style>
+    
+    
+    <style name="ScrollContent">
+	    <item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:scrollbars">none</item>
+		<item name="android:fillViewport">true</item>
+		<item name="android:layout_gravity">left|top</item>
+		<item name="android:fadingEdge">none</item>
+		<item name="android:paddingLeft">17dp</item>
+		<item name="android:paddingRight">17dp</item>
+		<item name="android:background">@color/gray_light</item>
+	</style>
+
+	<style name="FrameLayoutMain">
+		<item name="android:orientation">vertical</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:background">@color/white</item>
+	</style>
+	
+	<style name="LinearLayoutContent">
+	  	<item name="android:orientation">vertical</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:background">@android:color/white</item>
+		<item name="android:paddingTop">15dp</item>
+		<item name="android:paddingLeft">10dp</item>
+		<item name="android:paddingRight">10dp</item>
+		<item name="android:paddingBottom">30dp</item>
+		
+	</style>
+	
+	<style name="LinearLayoutWrap">
+	    <item name="android:orientation">vertical</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:paddingTop">80dp</item>
+	</style>
+	
+	<style name="Header">
+	    <item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">66dp</item>
+		<item name="android:background">@color/blue</item>
+	</style>
+	
+	<style name="TextViewTitle">
+	    <item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/gray_dark</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textSize">18dp</item>
+	</style>
+	
+	<style name="TextViewTitleSub">
+	    <item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/gray</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:textSize">15dp</item>
+	</style>
+	
+	<style name="EditTextDefault">
+	    <item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">35dp</item>
+		<item name="android:textSize">15dp</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:textColor">@color/black</item> 
+	</style>
+	
+	
+	<style name="Widget.Button" parent="@android:style/Widget.Button">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+	</style>
+	
+	<style name="Widget.Button.White">
+	    <item name="android:background">@drawable/bkg_options_button_white</item>
+		<item name="android:textColor">@drawable/btn_text_color_white</item>
+	</style>
+	
+	<style name="Widget.Button.Blue">
+	    <item name="android:background">@drawable/bkg_options_button_blue</item>
+		<item name="android:textColor">@drawable/btn_text_color_blue</item>
+	</style> 
+</resources>

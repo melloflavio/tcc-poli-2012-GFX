@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.hyvee.android"
+	style="@style/MainWindow">
+
+	<ScrollView 
+		android:id="@+id/scroll"
+		style="@style/ScrollContent">
+
+		<LinearLayout 
+			style="@style/LinearLayoutWrap">
+			
+		    <LinearLayout style="@style/LinearLayoutContent">
+		        
+		        
+		        <TextView 
+		            style="@style/TextViewTitle"
+		            android:layout_marginTop="15dp"
+		            android:text="@string/login_sign_in_to_gfx"/>
+		        
+		        <!-- Username Field -->
+		        <TextView
+			        style="@style/TextViewTitleSub"
+			        android:text="@string/login_email"/>
+		    
+		        
+		        <FrameLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content">
+		            
+			        <EditText
+			            android:id="@+id/login_field_username" 
+			            style="@style/EditTextDefault"
+			            android:inputType="textEmailAddress"/>
+			        
+			        <TextView 
+			            android:id="@+id/login_email_error"
+			            android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="10dp"
+				        android:layout_gravity="right|center_vertical"
+				        android:gravity="right|center_vertical"
+				        android:text="@string/login_invalid"
+				        android:textColor="@color/red_pale"
+				        android:textSize="13dp"
+				        android:visibility="gone"/>
+				</FrameLayout>
+		        
+		        <!--  Password Field -->
+		        <TextView
+			        style="@style/TextViewTitleSub"
+			        android:text="@string/login_password"/>
+		        
+		        <FrameLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content">
+		            
+			        <EditText
+			            android:id="@+id/login_field_password"
+			            style="@style/EditTextDefault"
+			            android:inputType="textPassword"/>
+			        
+			        <TextView
+			            android:id="@+id/login_password_error"
+			            android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="10dp"
+				        android:layout_gravity="right|center_vertical"
+				        android:gravity="right|center_vertical"
+				        android:text="@string/login_invalid"
+				        android:textColor="@color/red_pale"
+				        android:textSize="13dp"
+				        android:visibility="gone"/>
+				</FrameLayout>
+		        
+		        <FrameLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="15dp">
+		        
+		            <Button
+				        android:layout_width="120dp"
+				        android:layout_height="25dp"
+				        android:layout_gravity="left|center_vertical"
+				        android:layout_marginTop="15dp"
+				        android:layout_marginLeft="10dp"
+				        android:textSize="12dp"
+				        android:text="@string/login_forgot_password"
+				        android:onClick="forgotPasswordButtonClicked"/>
+		            
+		            <Button
+		                style="@style/Widget.Button.Blue"
+				        android:layout_width="80dp"
+				        android:layout_height="35dp"
+				        android:layout_gravity="right|center_vertical"
+				        android:layout_marginTop="15dp"
+				        android:layout_marginRight="10dp"
+				        android:textSize="13dp"
+				        android:text="@string/login_sign_in"
+				        android:onClick="signInButtonClicked"/>
+		        </FrameLayout>
+			    
+		        <!-- Linha divisória -->
+		        <TextView 
+		            android:layout_marginTop="30dp"
+		            android:layout_width="match_parent"
+		            android:layout_height="2dp"
+		            android:background="@color/blue"/>
+		        
+		        <TextView 
+		            style="@style/TextViewTitle"
+		            android:layout_marginTop="20dp"
+		            android:text="@string/login_new_to_gfx"/>
+		        
+		        <Button
+		            style="@style/Widget.Button.White"
+		            android:layout_width="100dp"
+		            android:layout_height="35dp"
+		            android:layout_marginTop="15dp"
+		            android:textSize="13dp"
+		            android:layout_gravity="center"
+		            android:text="@string/login_sign_up"
+		            android:onClick="signUpButtonClicked"/>
+		        
+		    </LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+
+	<!-- header -->
+	<include layout="@layout/include_header" android:id="@+id/header" />
+
+
+</FrameLayout>

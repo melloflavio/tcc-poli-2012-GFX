@@ -1,0 +1,29 @@
+<resources>
+
+    <string name="app_name">GFX</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_login_main">LoginMainActivity</string>
+
+    <!-- Login Activity -->
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_invalid">* Invalid</string>
+    <string name="login_sign_in">sign in</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="login_new_to_gfx">New to GFX Meter?</string>
+    <string name="login_sign_up">sign up</string>
+    <string name="login_sign_in_to_gfx">Sign in to your GFX Meter account</string>
+    <string name="title_activity_signup">SignupActivity</string>
+
+    
+    <!-- Signup Activity -->
+    <string name="signup_email">Email</string>
+    <string name="signup_reenter_email">Re-Enter Email</string>
+    <string name="signup_password">Password</string>
+    <string name="signup_reenter_password">Re-Enter Password</string>
+    <string name="signup_create_gfx_account">Crie uma nova conta</string>
+    <string name="signup_invalid">* Invalido</string>
+    <string name="signup_create_account_button">Criar Conta</string>
+</resources>
