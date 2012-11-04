@@ -25,13 +25,14 @@ public final class R {
     }
     public static final class drawable {
         public static final int bkg_button_blue=0x7f020000;
-        public static final int bkg_button_white=0x7f020001;
-        public static final int bkg_options_button_blue=0x7f020002;
-        public static final int bkg_options_button_white=0x7f020003;
-        public static final int btn_text_color_blue=0x7f020004;
-        public static final int btn_text_color_white=0x7f020005;
-        public static final int ic_action_search=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
+        public static final int bkg_button_blue_dark=0x7f020001;
+        public static final int bkg_button_white=0x7f020002;
+        public static final int bkg_options_button_blue=0x7f020003;
+        public static final int bkg_options_button_white=0x7f020004;
+        public static final int btn_text_color_blue=0x7f020005;
+        public static final int btn_text_color_white=0x7f020006;
+        public static final int ic_action_search=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
     }
     public static final class id {
         public static final int header=0x7f080005;
@@ -53,7 +54,7 @@ public final class R {
         public static final int signup_reenter_password_error=0x7f08000e;
     }
     public static final class layout {
-        public static final int activity_login_main=0x7f030000;
+        public static final int activity_login=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_signup=0x7f030002;
         public static final int include_header=0x7f030003;

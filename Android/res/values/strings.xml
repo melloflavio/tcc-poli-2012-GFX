@@ -8,13 +8,13 @@
 
     <!-- Login Activity -->
     <string name="login_email">Email</string>
-    <string name="login_password">Password</string>
-    <string name="login_invalid">* Invalid</string>
-    <string name="login_sign_in">sign in</string>
-    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="login_password">Senha</string>
+    <string name="login_invalid">* Inválido</string>
+    <string name="login_sign_in">entrar</string>
+    <string name="login_forgot_password">Esqueceu a Senha?</string>
     <string name="login_new_to_gfx">New to GFX Meter?</string>
     <string name="login_sign_up">sign up</string>
-    <string name="login_sign_in_to_gfx">Sign in to your GFX Meter account</string>
+    <string name="login_sign_in_to_gfx">Entre na sua conta GFX Meter</string>
     <string name="title_activity_signup">SignupActivity</string>
 
     

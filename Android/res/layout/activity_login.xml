@@ -21,6 +21,7 @@
 		        <!-- Username Field -->
 		        <TextView
 			        style="@style/TextViewTitleSub"
+			        android:layout_marginTop="15dp"
 			        android:text="@string/login_email"/>
 		    
 		        
@@ -42,7 +43,7 @@
 				        android:gravity="right|center_vertical"
 				        android:text="@string/login_invalid"
 				        android:textColor="@color/red_pale"
-				        android:textSize="13dp"
+				        android:textSize="20dp"
 				        android:visibility="gone"/>
 				</FrameLayout>
 		        
@@ -69,7 +70,7 @@
 				        android:gravity="right|center_vertical"
 				        android:text="@string/login_invalid"
 				        android:textColor="@color/red_pale"
-				        android:textSize="13dp"
+				        android:textSize="20dp"
 				        android:visibility="gone"/>
 				</FrameLayout>
 		        
@@ -79,23 +80,21 @@
 		            android:layout_marginTop="15dp">
 		        
 		            <Button
-				        android:layout_width="120dp"
-				        android:layout_height="25dp"
+				        android:layout_width="240dp"
+				        android:layout_height="50dp"
 				        android:layout_gravity="left|center_vertical"
-				        android:layout_marginTop="15dp"
-				        android:layout_marginLeft="10dp"
-				        android:textSize="12dp"
+				        android:layout_marginLeft="20dp"
+				        android:textSize="24dp"
 				        android:text="@string/login_forgot_password"
 				        android:onClick="forgotPasswordButtonClicked"/>
 		            
 		            <Button
 		                style="@style/Widget.Button.Blue"
-				        android:layout_width="80dp"
-				        android:layout_height="35dp"
+				        android:layout_width="160dp"
+				        android:layout_height="60dp"
 				        android:layout_gravity="right|center_vertical"
-				        android:layout_marginTop="15dp"
-				        android:layout_marginRight="10dp"
-				        android:textSize="13dp"
+				        android:layout_marginRight="20dp"
+				        android:textSize="26dp"
 				        android:text="@string/login_sign_in"
 				        android:onClick="signInButtonClicked"/>
 		        </FrameLayout>
@@ -106,7 +105,7 @@
 		            android:layout_width="match_parent"
 		            android:layout_height="2dp"
 		            android:background="@color/blue"/>
-		        
+		       <!--  
 		        <TextView 
 		            style="@style/TextViewTitle"
 		            android:layout_marginTop="20dp"
@@ -120,7 +119,7 @@
 		            android:textSize="13dp"
 		            android:layout_gravity="center"
 		            android:text="@string/login_sign_up"
-		            android:onClick="signUpButtonClicked"/>
+		            android:onClick="signUpButtonClicked"/>  -->
 		        
 		    </LinearLayout>
 		</LinearLayout>

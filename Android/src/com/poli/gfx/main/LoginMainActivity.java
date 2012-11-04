@@ -24,7 +24,7 @@ public class LoginMainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_main);
+        setContentView(R.layout.activity_login);
         
         ((TextView) findViewById(R.id.header_title)).setText("Login");
         
