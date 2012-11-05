@@ -1,18 +1,31 @@
 package com.poli.gfx.main;
 
+import org.apache.http.params.HttpAbstractParamBean;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.poli.gfx.R;
+import com.poli.gfx.util.AppHttpClient;
+import com.poli.gfx.util.Paths;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
 public class LoginMainActivity extends Activity {
 
+	private static final String TAG = LoginMainActivity.class.getSimpleName();
+	
 	private TextView mEmailErrorView;
 	private TextView mPasswordErrorView;
 	private TextView mEmailInputView;
@@ -86,6 +99,8 @@ public class LoginMainActivity extends Activity {
     	}
     	else{
     		//Valid input
+    		mEmailErrorView.setVisibility(View.GONE);
+    		mPasswordErrorView.setVisibility(View.GONE);
     		loginWithEmailAndPassword(email, password);
     	}
     	
@@ -112,7 +127,56 @@ public class LoginMainActivity extends Activity {
     }
     
     private void loginWithEmailAndPassword(String email, String password){
-    	//TODO
+    	RequestParams params = new RequestParams();
+    	params.put("email", email);
+    	params.put("password", password);
+    	
+    	Log.d("BBB", "Loggin in");
+    	
+    	AppHttpClient.post(Paths.GET_ACCOUNT, params, new JsonHttpResponseHandler(){
+//    	AppHttpClient.post(Paths.GET_ACCOUNT, params, new AsyncHttpResponseHandler(){
+    		@Override
+    		public void onStart() {
+    	    	showProgressDialog();
+    			Log.d(TAG, "Start");
+    		}
+    		
+    		@Override
+    		public void onSuccess(JSONObject response) {
+    			Log.d(TAG, "Success = "+response.toString());
+    			
+    			boolean success;
+				try {
+					success = response.getBoolean("status");
+				} catch (JSONException e) {
+					//TODO error receiving message from server
+					success = false;//Default value
+					e.printStackTrace();
+				}
+				if(success){
+					Log.d(TAG, "Oh YEAH!");
+				}
+				else{
+					Log.d(TAG, "NOOOOOOOOO");
+				}
+    		}
+    		
+    		@Override
+			public void onFailure(Throwable e) {
+    			Log.d(TAG, "Fail");
+    		}
+    		
+    		@Override
+			public void onFailure(Throwable e, String response) {
+    			Log.d(TAG, "Fail String  response = "+response);
+    		}
+    		
+    		@Override
+    		public void onFinish() {
+    			hideProgressDialog();
+    			Log.d(TAG, "Finish");
+    		}
+    	});
     }
     
     
