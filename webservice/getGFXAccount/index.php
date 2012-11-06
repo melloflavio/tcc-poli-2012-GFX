@@ -1,7 +1,19 @@
 <?php 
 
-	//echo '{"status"="true", "id"="123"}';
-	
+
+/*switch($_SERVER['REQUEST_METHOD']){
+   case 'GET':
+	getGFXAccount();
+    break;
+   case 'POST':
+    break;
+   case 'PUT':
+    break;
+   case 'DELETE':
+    break;
+}
+
+function getGFXAccount(){	*/
 	$input = true;
 	
 	//Gets the input
@@ -12,17 +24,22 @@
 		$password =  $_GET["password"];
 	}
 	
+	$validemail = true;
+	$validpass = true;
+	
 	if(!isset($email)){
 		$input = false;
+		$validemail = false;
 	}
 	if(!isset($password)){
 		$input = false;
+		$validpass = false;
 	}
 	
 	
 	if(!$input){//Erro no input, retorna erro
 		$response["status"] = "false";
-		$response["message"] = "Erro ao receber dados de login";
+		$response["message"] = "Erro ao receber dados de login email =".$validemail." password = ".$validpass;
 		
 		echo json_encode($response);
 		}
@@ -38,11 +55,14 @@
 		$query = "SELECT user_id FROM users WHERE email='".$email."' AND password='".$password."'";
 		$result = mysql_query($query);
 		
-		if(mysql_num_rows($result) > 0){
+		if($result && mysql_num_rows($result) > 0){
 			$row = mysql_fetch_array($result, MYSQL_ASSOC);
 			
 			$response["status"] = "true";
-			$response["id"] = $row["user_id"];
+			$response["userId"] = $row["user_id"];
+			$response["houseIds"] = array();
+			//{"status":"true", "userId" = "12", "houseIds": [{"houseId":"1234"}, {"houseId":"1234"}]}
+
 		}
 		else{
 			$response["status"] = "false";
@@ -50,4 +70,5 @@
 			
 		echo json_encode($response);
 	}
+//}
 ?>
