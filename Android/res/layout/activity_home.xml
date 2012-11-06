@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.hyvee.android"
+	style="@style/MainWindow">
+
+	<ScrollView 
+		android:id="@+id/scroll"
+		style="@style/ScrollContent">
+
+		<LinearLayout 
+			style="@style/LinearLayoutWrap">
+			
+		    <LinearLayout style="@style/LinearLayoutContent">
+		    
+		        <Button 
+		            style="@style/Widget.Button.SquareBlue"
+		            android:layout_width="400dp"
+		            android:layout_height="80dp"
+		            android:text="Minhas Casas"
+		            android:textSize="30dp"
+		            android:layout_marginTop="30dp"
+		            />
+		        
+		        <Button 
+		            style="@style/Widget.Button.SquareBlue"
+		            android:layout_width="400dp"
+		            android:layout_height="80dp"
+		            android:text="Opções"
+		            android:textSize="30dp"
+		            android:layout_marginTop="30dp"
+		            />
+		        
+		        <Button 
+		            style="@style/Widget.Button.SquareBlue"
+		            android:layout_width="400dp"
+		            android:layout_height="80dp"
+		            android:text="Sobre"
+		            android:textSize="30dp"
+		            android:layout_marginTop="30dp"
+		            />
+		        
+		        
+		        
+		    </LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+
+	<!-- header -->
+	<include layout="@layout/include_header" android:id="@+id/header" />
+
+
+</FrameLayout>

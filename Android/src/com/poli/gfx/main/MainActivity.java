@@ -7,6 +7,7 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.series.XYSeries;
 import com.androidplot.xy.XYPlot;
 import com.poli.gfx.R;
+import com.poli.gfx.util.SharedPreferencesAdapter;
 
 import java.util.Arrays;
 
@@ -70,8 +71,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        Intent i = new Intent(this, LoginMainActivity.class);
-		startActivity(i);
+        if (SharedPreferencesAdapter.getStringFromSharedPreferences(SharedPreferencesAdapter.USER_ID_KEY, getApplicationContext()) != null){
+        	Intent i = new Intent(this, HomeScreenActivity.class);
+    		startActivity(i);
+        }
+        else {
+        	Intent i = new Intent(this, LoginActivity.class);
+    		startActivity(i);
+        }
 	}
 
     @Override

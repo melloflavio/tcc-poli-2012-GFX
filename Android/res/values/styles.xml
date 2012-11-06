@@ -92,5 +92,10 @@
 	<style name="Widget.Button.Blue">
 	    <item name="android:background">@drawable/bkg_options_button_blue</item>
 		<item name="android:textColor">@drawable/btn_text_color_blue</item>
-	</style> 
+	</style>
+	
+	<style name="Widget.Button.SquareBlue">
+	    <item name="android:background">@drawable/bkg_options_button_square_blue</item>
+		<item name="android:textColor">@drawable/btn_text_color_square_blue</item>
+	</style>
 </resources>
