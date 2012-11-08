@@ -59,8 +59,30 @@ function getGFXAccount(){	*/
 			$row = mysql_fetch_array($result, MYSQL_ASSOC);
 			
 			$response["status"] = "true";
-			$response["userId"] = $row["user_id"];
-			$response["houseIds"] = array();
+			$user_id = $row["user_id"];
+			$response["userId"] = $user_id;
+			
+			$houses = array();
+			
+			//fetches the houses array
+			$query = "SELECT house_id, nome_casa FROM residencias WHERE user_id='".$user_id."'";
+			$result = mysql_query($query);
+			if($result){
+				$num_rows = mysql_num_rows($result);
+
+				for ($i = 0 ; $i < $num_rows ; $i++){
+					$row = mysql_fetch_array($result, MYSQL_ASSOC);
+					$house_id = $row["house_id"];
+					$house_name = $row["nome_casa"];
+					
+					$house["houseId"] = $house_id;
+					$house["houseName"] = $house_name;
+					
+					$houses[] = $house;
+				}
+			}
+			
+			$response["houses"] = $houses;
 			//{"status":"true", "userId" = "12", "houseIds": [{"houseId":"1234"}, {"houseId":"1234"}]}
 
 		}
