@@ -16,10 +16,21 @@
 		            style="@style/Widget.Button.SquareBlue"
 		            android:layout_width="400dp"
 		            android:layout_height="80dp"
+		            android:text="Medidas"
+		            android:textSize="30dp"
+		            android:layout_marginTop="30dp"
+		            android:layout_gravity="center"
+		            />
+		        
+		        <Button 
+		            style="@style/Widget.Button.SquareBlue"
+		            android:layout_width="400dp"
+		            android:layout_height="80dp"
 		            android:text="Minhas Casas"
 		            android:textSize="30dp"
 		            android:layout_marginTop="30dp"
-		            />
+		            android:layout_gravity="center"
+		            android:onClick="minhasCasasButtonClicked"/>
 		        
 		        <Button 
 		            style="@style/Widget.Button.SquareBlue"
@@ -28,6 +39,7 @@
 		            android:text="Opções"
 		            android:textSize="30dp"
 		            android:layout_marginTop="30dp"
+		            android:layout_gravity="center"
 		            />
 		        
 		        <Button 
@@ -37,6 +49,7 @@
 		            android:text="Sobre"
 		            android:textSize="30dp"
 		            android:layout_marginTop="30dp"
+		            android:layout_gravity="center"
 		            />
 		        
 		        

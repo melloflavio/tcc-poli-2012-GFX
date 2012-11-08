@@ -9,6 +9,7 @@ public class SharedPreferencesAdapter {
 	//Shared Preferences
     public static final String USER_ID_KEY = "user_id";
     public static final String BASE_HOUSE_ID_KEY = "house_id";
+    public static final String BASE_HOUSE_NAME_KEY = "house_name";
     public static final String HOUSE_COUNT_KEY = "house_count";
 	
 	//String

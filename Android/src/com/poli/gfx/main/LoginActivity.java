@@ -164,21 +164,21 @@ public class LoginActivity extends Activity {
     			
     			boolean success;
     			String userId;
-    			JSONArray houseIds;
+    			JSONArray houses;
 				try {
 					success = response.getBoolean("status");
 					userId = response.getString("userId");
-					houseIds = response.getJSONArray("houseIds");
+					houses = response.getJSONArray("houses");
 				} catch (JSONException e) {
 					//TODO error receiving message from server
 					success = false;//Default value
 					userId = null;
-					houseIds = null;
+					houses = null;
 					e.printStackTrace();
 				}
 				if(success){
 					Log.d(TAG, "true success");
-					storeValuesToSharedPreferences(userId, houseIds);
+					storeValuesToSharedPreferences(userId, houses);
 					
 					goToHomeScreen();
 				}
@@ -220,21 +220,25 @@ public class LoginActivity extends Activity {
     	});
     }
     
-    private void storeValuesToSharedPreferences(String userId, JSONArray houseIds){
+    private void storeValuesToSharedPreferences(String userId, JSONArray houses){
     	SharedPreferencesAdapter.storeStringToSharedPreferences(SharedPreferencesAdapter.USER_ID_KEY, userId, getApplicationContext());
-    	int length = houseIds.length();
+    	int length = houses.length();
     	for (int i = 0; i < length ; i ++){
     		JSONObject obj;
     		String currHouseId;
+    		String currHouseName;
 			try {
-				obj = houseIds.getJSONObject(i);
+				obj = houses.getJSONObject(i);
 				currHouseId = obj.getString("houseId");
+				currHouseName = obj.getString("houseName");
 			} catch (JSONException e) {
 				currHouseId = null;
+				currHouseName = null;
 				e.printStackTrace();
 			}
 			if(currHouseId != null){
 				SharedPreferencesAdapter.storeStringToSharedPreferences(SharedPreferencesAdapter.BASE_HOUSE_ID_KEY+i, currHouseId, getApplicationContext());
+				SharedPreferencesAdapter.storeStringToSharedPreferences(SharedPreferencesAdapter.BASE_HOUSE_NAME_KEY+i, currHouseName, getApplicationContext());
 			}
     	}
     	

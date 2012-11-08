@@ -11,18 +11,19 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int black=0x7f040009;
+        public static final int black=0x7f04000a;
         public static final int blue=0x7f040003;
-        public static final int blue_pale=0x7f040004;
+        public static final int blue_dark=0x7f040004;
+        public static final int blue_pale=0x7f040005;
         public static final int gray=0x7f040000;
         public static final int gray_dark=0x7f040001;
         public static final int gray_light=0x7f040002;
-        public static final int red=0x7f04000b;
-        public static final int red_pale=0x7f04000a;
-        public static final int white=0x7f040007;
-        public static final int white_pale=0x7f040008;
-        public static final int yellow=0x7f040005;
-        public static final int yellow_pale=0x7f040006;
+        public static final int red=0x7f04000c;
+        public static final int red_pale=0x7f04000b;
+        public static final int white=0x7f040008;
+        public static final int white_pale=0x7f040009;
+        public static final int yellow=0x7f040006;
+        public static final int yellow_pale=0x7f040007;
     }
     public static final class drawable {
         public static final int bkg_button_blue=0x7f020000;
@@ -41,29 +42,35 @@ public final class R {
     }
     public static final class id {
         public static final int header=0x7f080001;
-        public static final int header_title=0x7f08000f;
+        public static final int header_title=0x7f080014;
         public static final int login_email_error=0x7f080003;
         public static final int login_field_password=0x7f080004;
         public static final int login_field_username=0x7f080002;
         public static final int login_password_error=0x7f080005;
-        public static final int menu_settings=0x7f080010;
+        public static final int menu_settings=0x7f080015;
+        public static final int myProperties_houseAddr=0x7f080009;
+        public static final int myProperties_houseCity=0x7f08000a;
+        public static final int myProperties_houseName=0x7f080008;
+        public static final int myProperties_houseState=0x7f08000b;
         public static final int mySimpleXYPlot=0x7f080006;
+        public static final int myproperties_spinner=0x7f080007;
         public static final int scroll=0x7f080000;
-        public static final int signup_email_error=0x7f080008;
-        public static final int signup_field_password=0x7f08000b;
-        public static final int signup_field_reenter_email=0x7f080009;
-        public static final int signup_field_reenter_password=0x7f08000d;
-        public static final int signup_field_username=0x7f080007;
-        public static final int signup_password_error=0x7f08000c;
-        public static final int signup_reenter_email_error=0x7f08000a;
-        public static final int signup_reenter_password_error=0x7f08000e;
+        public static final int signup_email_error=0x7f08000d;
+        public static final int signup_field_password=0x7f080010;
+        public static final int signup_field_reenter_email=0x7f08000e;
+        public static final int signup_field_reenter_password=0x7f080012;
+        public static final int signup_field_username=0x7f08000c;
+        public static final int signup_password_error=0x7f080011;
+        public static final int signup_reenter_email_error=0x7f08000f;
+        public static final int signup_reenter_password_error=0x7f080013;
     }
     public static final class layout {
         public static final int activity_home=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int activity_main=0x7f030002;
-        public static final int activity_signup=0x7f030003;
-        public static final int include_header=0x7f030004;
+        public static final int activity_my_properties=0x7f030003;
+        public static final int activity_signup=0x7f030004;
+        public static final int include_header=0x7f030005;
     }
     public static final class menu {
         public static final int activity_login_main=0x7f070000;
@@ -109,5 +116,9 @@ public final class R {
         public static final int Widget_Button_Blue=0x7f06000c;
         public static final int Widget_Button_SquareBlue=0x7f06000d;
         public static final int Widget_Button_White=0x7f06000b;
+        public static final int Widget_TextView=0x7f06000e;
+        public static final int Widget_TextView_MyProperties=0x7f06000f;
+        public static final int Widget_TextView_MyProperties_Label=0x7f060010;
+        public static final int Widget_TextView_MyProperties_Value=0x7f060011;
     }
 }

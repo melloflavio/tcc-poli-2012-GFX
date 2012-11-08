@@ -26,10 +26,17 @@
         <activity
             android:name=".main.LoginActivity"
             android:screenOrientation="unspecified" />
+        
         <!-- Home -->
         <activity
             android:name=".main.HomeScreenActivity"
             android:screenOrientation="unspecified" />
+        
+        <!-- My Properties -->
+        <activity
+            android:name=".main.MyPropertiesActivity"
+            android:screenOrientation="unspecified"/>
+        
         <activity
             android:name=".main.SignupActivity"
             android:label="@string/title_activity_signup" >

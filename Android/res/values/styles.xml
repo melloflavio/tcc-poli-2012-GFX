@@ -98,4 +98,26 @@
 	    <item name="android:background">@drawable/bkg_options_button_square_blue</item>
 		<item name="android:textColor">@drawable/btn_text_color_square_blue</item>
 	</style>
+	
+	<style name="Widget.TextView" parent="@android:style/Widget.TextView"></style>
+	
+	<style name="Widget.TextView.MyProperties"></style>
+	
+	<style name="Widget.TextView.MyProperties.Label">
+	    <item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/blue_dark</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:textSize">25dp</item>
+	</style>
+	
+	<style name="Widget.TextView.MyProperties.Value">
+	    <item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/black</item>
+		<item name="android:layout_marginLeft">15dp</item>
+		<item name="android:gravity">right|center_vertical</item>
+		<item name="android:textSize">25dp</item>
+	</style>
 </resources>

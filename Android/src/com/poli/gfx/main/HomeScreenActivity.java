@@ -2,7 +2,9 @@ package com.poli.gfx.main;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.poli.gfx.R;
@@ -30,5 +32,11 @@ public class HomeScreenActivity extends Activity {
    		
    		super.onDestroy();
    	}
+    
+    
+    public void minhasCasasButtonClicked(View v){
+    	Intent i = new Intent(this, MyPropertiesActivity.class);
+		startActivity(i);
+    }
 
 }
