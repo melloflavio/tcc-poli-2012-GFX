@@ -120,4 +120,31 @@
 		<item name="android:gravity">right|center_vertical</item>
 		<item name="android:textSize">25dp</item>
 	</style>
+	
+	<style name="Widget.TextView.About"></style>
+	
+	<style name="Widget.TextView.About.Paragraph">
+	    <item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/gray</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textSize">20dp</item>
+	</style>
+	
+	<style name="Widget.TextView.About.Name">
+	    <item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/gray</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:textSize">20dp</item>
+	</style>
+	
+	<style name="Widget.TextView.About.Subtitle">
+	    <item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textColor">@color/gray</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textSize">25dp</item>
+	</style>
 </resources>

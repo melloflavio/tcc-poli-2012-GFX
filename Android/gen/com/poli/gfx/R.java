@@ -65,12 +65,13 @@ public final class R {
         public static final int signup_reenter_password_error=0x7f080013;
     }
     public static final class layout {
-        public static final int activity_home=0x7f030000;
-        public static final int activity_login=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_my_properties=0x7f030003;
-        public static final int activity_signup=0x7f030004;
-        public static final int include_header=0x7f030005;
+        public static final int activity_about=0x7f030000;
+        public static final int activity_home=0x7f030001;
+        public static final int activity_login=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_my_properties=0x7f030004;
+        public static final int activity_signup=0x7f030005;
+        public static final int include_header=0x7f030006;
     }
     public static final class menu {
         public static final int activity_login_main=0x7f070000;
@@ -78,6 +79,21 @@ public final class R {
         public static final int activity_signup=0x7f070002;
     }
     public static final class string {
+        public static final int about_membro1=0x7f050019;
+        public static final int about_membro2=0x7f05001a;
+        public static final int about_membro3=0x7f05001b;
+        public static final int about_membros=0x7f050018;
+        public static final int about_orientador1=0x7f05001d;
+        public static final int about_orientador2=0x7f05001e;
+        public static final int about_orientadores=0x7f05001c;
+        public static final int about_subtitle=0x7f050013;
+        public static final int about_subtitle2=0x7f050014;
+        public static final int about_text_1=0x7f050015;
+        public static final int about_text_2=0x7f050016;
+        public static final int about_text_3=0x7f050017;
+        /**  About 
+         */
+        public static final int about_title=0x7f050012;
         public static final int app_name=0x7f050000;
         /**  Login Activity 
          */
@@ -117,6 +133,10 @@ public final class R {
         public static final int Widget_Button_SquareBlue=0x7f06000d;
         public static final int Widget_Button_White=0x7f06000b;
         public static final int Widget_TextView=0x7f06000e;
+        public static final int Widget_TextView_About=0x7f060012;
+        public static final int Widget_TextView_About_Name=0x7f060014;
+        public static final int Widget_TextView_About_Paragraph=0x7f060013;
+        public static final int Widget_TextView_About_Subtitle=0x7f060015;
         public static final int Widget_TextView_MyProperties=0x7f06000f;
         public static final int Widget_TextView_MyProperties_Label=0x7f060010;
         public static final int Widget_TextView_MyProperties_Value=0x7f060011;

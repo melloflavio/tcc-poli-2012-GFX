@@ -37,6 +37,11 @@
             android:name=".main.MyPropertiesActivity"
             android:screenOrientation="unspecified"/>
         
+        <!-- About -->
+        <activity
+            android:name=".main.AboutActivity"
+            android:screenOrientation="unspecified"/>
+        
         <activity
             android:name=".main.SignupActivity"
             android:label="@string/title_activity_signup" >

@@ -23,4 +23,19 @@
     <string name="signup_create_gfx_account">Crie uma nova conta</string>
     <string name="signup_invalid">* Invalido</string>
     <string name="signup_create_account_button">Criar Conta</string>
+    
+    <!-- About -->
+    <string name="about_title">GFX Meter</string>
+    <string name="about_subtitle">Versão 1.0</string>
+    <string name="about_subtitle2">2012</string>
+    <string name="about_text_1">O GFX Meter é um aplicativo que constitui parte de um projeto de formatura de alunos do curso de Engenharia Elétrica - Ênfase em Computação da Escola Politécnica da USP.</string>
+    <string name="about_text_2">O projeto constitui em um medidor de consumo energético residencial que disponibiliza os dados coletados aos clientes/usuários através de uma interface web e de uma interface em dispositivo móvel.</string>
+    <string name="about_text_3">A partir do aplicativo é possível vizualizar os dados de consumo energético da casa de forma intuitiva e prática.</string>
+    <string name="about_membros">Membros:</string>
+    <string name="about_membro1">Flavio Ribeiro de Aquino Figueiredo Mello</string>
+    <string name="about_membro2">Francisco Caio Lima Paiva</string>
+    <string name="about_membro3">Gilberto Sasaki Cymbaum</string>
+    <string name="about_orientadores">Orientadores:</string>
+    <string name="about_orientador1">Prof. Dr. Reginaldo Arakaki</string>
+    <string name="about_orientador2">Prof. Dr. Walter Kaiser</string>
 </resources>

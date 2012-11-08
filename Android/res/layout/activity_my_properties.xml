@@ -54,8 +54,7 @@
 		            
 		            <TextView
 		                android:id="@+id/myProperties_houseName"
-		                style="@style/Widget.TextView.MyProperties.Value"
-		                android:text="Casa"/>
+		                style="@style/Widget.TextView.MyProperties.Value"/>
 		        </LinearLayout>
 		        
 		        <!-- Endereço -->
@@ -72,8 +71,7 @@
 		            
 		            <TextView
 		                android:id="@+id/myProperties_houseAddr"
-		                style="@style/Widget.TextView.MyProperties.Value"
-		                android:text="Rua dos Bobos"/>
+		                style="@style/Widget.TextView.MyProperties.Value"/>
 		        </LinearLayout>
 		        
 		        <!-- Cidade -->
@@ -90,8 +88,7 @@
 		            
 		            <TextView
 		                android:id="@+id/myProperties_houseCity"
-		                style="@style/Widget.TextView.MyProperties.Value"
-		                android:text="São Paulo"/>
+		                style="@style/Widget.TextView.MyProperties.Value"/>
 		        </LinearLayout>
 		        
 		        <!-- Estado -->
@@ -108,8 +105,7 @@
 		            
 		            <TextView
 		                android:id="@+id/myProperties_houseState"
-		                style="@style/Widget.TextView.MyProperties.Value"
-		                android:text="SP"/>
+		                style="@style/Widget.TextView.MyProperties.Value"/>
 		        </LinearLayout>
 		        
 		        <!-- Consumo Médio -->

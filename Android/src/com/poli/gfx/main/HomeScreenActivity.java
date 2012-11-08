@@ -38,5 +38,10 @@ public class HomeScreenActivity extends Activity {
     	Intent i = new Intent(this, MyPropertiesActivity.class);
 		startActivity(i);
     }
+    
+    public void sobreButtonClicked(View v){
+    	Intent i = new Intent(this, AboutActivity.class);
+		startActivity(i);
+    }
 
 }
