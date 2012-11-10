@@ -43,5 +43,10 @@ public class HomeScreenActivity extends Activity {
     	Intent i = new Intent(this, AboutActivity.class);
 		startActivity(i);
     }
+    
+    public void medidasButtonClicked(View v){
+    	Intent i = new Intent(this, ConsumoActivity.class);
+    	startActivity(i);
+    }
 
 }

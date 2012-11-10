@@ -5,7 +5,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="13" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     
@@ -41,6 +41,11 @@
         <activity
             android:name=".main.AboutActivity"
             android:screenOrientation="unspecified"/>
+        
+        <!-- Medidas -->
+        <activity
+            android:name=".main.ConsumoActivity"
+            android:screenOrientation="landscape"/>
         
         <activity
             android:name=".main.SignupActivity"

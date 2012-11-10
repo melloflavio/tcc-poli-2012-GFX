@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.hyvee.android"
+	style="@style/MainWindow">
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="horizontal"
+	    android:paddingTop="66dp">
+	    
+	    <!-- houses list -->
+	    <ListView 
+	        android:layout_width="250dp"
+	        android:layout_height="match_parent"
+	        android:id="@+id/consumo_listView">
+	        
+	    </ListView>
+	    
+	    <!-- Linha Divisória -->
+	    <TextView 
+	        android:layout_width="1dp"
+	        android:layout_height="match_parent"
+	        android:background="@color/blue_dark"/>
+	    
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical">
+	        
+	        <!-- Gráfico -->
+	        <FrameLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1">
+	            
+	            <com.androidplot.xy.XYPlot
+		            android:id="@+id/consumo_mySimpleXYPlot"
+		            android:layout_width="match_parent"
+		            android:layout_height="match_parent"
+		            title="________________________________________"/>
+	            
+	        </FrameLayout>
+	        
+	        <!-- Linha Divisória -->
+	        <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="1dp"
+	            android:background="@color/blue_dark"/>
+	        
+	        <!-- Escolha Tipo -->
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="80dp"
+	            android:background="@color/blue_pale">
+	            
+	        </LinearLayout>
+	    </LinearLayout>
+	    
+	</LinearLayout>
+
+	<!-- header -->
+	<include layout="@layout/include_header" android:id="@+id/header" />
+
+
+</FrameLayout>
