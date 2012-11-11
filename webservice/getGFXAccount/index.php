@@ -14,6 +14,7 @@
 }
 
 function getGFXAccount(){	*/
+
 	$input = true;
 	
 	//Gets the input
@@ -39,7 +40,6 @@ function getGFXAccount(){	*/
 	
 	if(!$input){//Erro no input, retorna erro
 		$response["status"] = "false";
-		$response["message"] = "Erro ao receber dados de login email =".$validemail." password = ".$validpass;
 		
 		echo json_encode($response);
 		}
@@ -87,7 +87,7 @@ function getGFXAccount(){	*/
 
 		}
 		else{
-			$response["status"] = "false";
+			$response["status"] = "false";			
 		}
 			
 		echo json_encode($response);
