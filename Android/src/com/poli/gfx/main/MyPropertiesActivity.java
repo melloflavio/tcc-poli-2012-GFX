@@ -1,6 +1,7 @@
 package com.poli.gfx.main;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,6 +106,7 @@ private ArrayAdapter<String> mSpinnerAdapter;
     private void requestPropertyInfo(final String houseId) {
     	RequestParams params = new RequestParams();
     	params.put("houseId", houseId);
+    	params.put("random", String.format("%f", new Random().nextFloat()));
     	
     	Log.d(TAG, "houseId = "+houseId+"params = "+params.toString());
     	

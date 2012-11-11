@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.hyvee.android"
+	style="@style/MainWindow">
+
+	<ScrollView 
+		android:id="@+id/scroll"
+		style="@style/ScrollContent">
+
+		<LinearLayout 
+			style="@style/LinearLayoutWrap">
+			
+		    <LinearLayout style="@style/LinearLayoutContent">
+		    
+		        <TextView 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:textColor="@color/blue_dark"
+		            android:layout_marginTop="30dp"
+		            android:gravity="center"
+		            android:textStyle="bold"
+		            android:textSize="30dp"
+		            android:text="Escolha uma residência"/>
+		        
+		        <Spinner 
+		            android:id="@+id/myproperties_spinner"
+		            android:layout_width="300dp"
+		            android:layout_height="60dp"
+		            android:layout_gravity="center"
+		            android:layout_marginTop="15dp"/>
+		        
+		        <!-- Dados -->
+		        <TextView 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:textColor="@color/blue_dark"
+		            android:layout_marginTop="30dp"
+		            android:gravity="center"
+		            android:textStyle="bold"
+		            android:textSize="35dp"
+		            android:text="Informações"/>
+		        
+		        <!-- Nome da Casa -->
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:layout_marginTop="20dp"
+		            android:layout_marginLeft="15dp">
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Label"
+		                android:text="Nome da Residência:"/>
+		            
+		            <TextView
+		                android:id="@+id/myProperties_houseName"
+		                style="@style/Widget.TextView.MyProperties.Value"/>
+		        </LinearLayout>
+		        
+		        <!-- Endereço -->
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:layout_marginTop="20dp"
+		            android:layout_marginLeft="15dp">
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Label"
+		                android:text="Endereço"/>
+		            
+		            <TextView
+		                android:id="@+id/myProperties_houseAddr"
+		                style="@style/Widget.TextView.MyProperties.Value"/>
+		        </LinearLayout>
+		        
+		        <!-- Cidade -->
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:layout_marginTop="20dp"
+		            android:layout_marginLeft="15dp">
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Label"
+		                android:text="Cidade"/>
+		            
+		            <TextView
+		                android:id="@+id/myProperties_houseCity"
+		                style="@style/Widget.TextView.MyProperties.Value"/>
+		        </LinearLayout>
+		        
+		        <!-- Estado -->
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:layout_marginTop="20dp"
+		            android:layout_marginLeft="15dp">
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Label"
+		                android:text="Estado"/>
+		            
+		            <TextView
+		                android:id="@+id/myProperties_houseState"
+		                style="@style/Widget.TextView.MyProperties.Value"/>
+		        </LinearLayout>
+		        
+		        <!-- Consumo Médio -->
+		        <TextView 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:textColor="@color/blue_dark"
+		            android:layout_marginTop="30dp"
+		            android:gravity="center"
+		            android:textStyle="bold"
+		            android:textSize="35dp"
+		            android:text="Consumo Médio"/>
+		        
+		        <!-- Consumo Diário-->
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:layout_marginTop="20dp"
+		            android:layout_marginLeft="15dp">
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Label"
+		                android:text="Diário:"/>
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Value"
+		                android:text="15kWh/Dia"/>
+		        </LinearLayout>
+		        
+		        <!-- Semanal -->
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:layout_marginTop="15dp"
+		            android:layout_marginLeft="15dp">
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Label"
+		                android:text="Semanal:"/>
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Value"
+		                android:text="75 kWh/Semana"/>
+		        </LinearLayout>
+		        
+		        <!-- Mensal -->
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:layout_marginTop="15dp"
+		            android:layout_marginLeft="15dp">
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Label"
+		                android:text="Mensal:"/>
+		            
+		            <TextView 
+		                style="@style/Widget.TextView.MyProperties.Value"
+		                android:text="2000 kWh/Mes"/>
+		        </LinearLayout>
+		        
+		        
+		    </LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+
+	<!-- header -->
+	<include layout="@layout/include_header" android:id="@+id/header" />
+
+
+</FrameLayout>

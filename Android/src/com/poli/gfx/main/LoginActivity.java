@@ -203,7 +203,7 @@ public class LoginActivity extends Activity {
     		@Override
 			public void onFailure(Throwable e, String response) {
     			showLoginErrorDialog();
-    			Log.d(TAG, "Fail object  response = "+response);
+    			Log.d(TAG, "Fail string  response = "+response.toString());
     		}
     		
     		@Override

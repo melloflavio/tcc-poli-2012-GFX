@@ -1,5 +1,6 @@
 package com.poli.gfx.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import android.util.Log;
@@ -9,10 +10,10 @@ public class Medida {
 	private static final String TAG  = Medida.class.getSimpleName();
 	
 	private double _potencia;
-	private Date _inicioMedida;
-	private Date _terminoMedida;
+	private Calendar _inicioMedida;
+	private Calendar _terminoMedida;
 	
-	public Medida (double potencia, Date inicio, Date termino){
+	public Medida (double potencia, Calendar inicio, Calendar termino){
 		_potencia = potencia;
 		_inicioMedida = inicio;
 		_terminoMedida = termino;
@@ -25,23 +26,23 @@ public class Medida {
 	public void setPotencia(double potencia) {
 		this._potencia = potencia;
 	}
-	public Date getInicioMedida() {
+	public Calendar getInicioMedida() {
 		return _inicioMedida;
 	}
-	public void setInicioMedida(Date inicioMedida) {
+	public void setInicioMedida(Calendar inicioMedida) {
 		this._inicioMedida = inicioMedida;
 	}
-	public Date getTerminoMedida() {
+	public Calendar getTerminoMedida() {
 		return _terminoMedida;
 	}
-	public void setTerminoMedida(Date terminoMedida) {
+	public void setTerminoMedida(Calendar terminoMedida) {
 		this._terminoMedida = terminoMedida;
 	}
 	
 	// Fim Getters e Setters
 	
 	public long getDuracaoMedidaEmMinutos(){
-		long diff = _terminoMedida.getTime() - _inicioMedida.getTime();
+		long diff = _terminoMedida.getTimeInMillis() - _inicioMedida.getTimeInMillis();
 		return diff/(1000 * 60);
 	}
 	
@@ -55,9 +56,9 @@ public class Medida {
 	}
 	
 	public double getHoraDoDiaInicio(){
-		double hora = _inicioMedida.getHours();
-		hora += ((double)_inicioMedida.getMinutes())/60.0;
 		
+		double hora =(double) _inicioMedida.get(Calendar.HOUR_OF_DAY);
+		hora += ((double)_inicioMedida.get(Calendar.MINUTE))/60.0;
 		return hora;
 	}
 }

@@ -9,13 +9,90 @@
 	    android:orientation="horizontal"
 	    android:paddingTop="66dp">
 	    
-	    <!-- houses list -->
-	    <ListView 
+	    
+	    <LinearLayout 
 	        android:layout_width="250dp"
 	        android:layout_height="match_parent"
-	        android:id="@+id/consumo_listView">
+	        android:orientation="vertical">
 	        
-	    </ListView>
+	        <!-- Escolha Tipo -->
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="135dp"
+	            android:background="@color/blue_pale"
+	            android:orientation="vertical">
+	            
+	            <FrameLayout 
+	                android:layout_width="match_parent"
+	                android:layout_height="65dp">
+	            
+	                <TextView 
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="left|center_vertical"
+	                    android:gravity="left|center_vertical"
+	                    android:text="Relatório:"
+	                    android:textSize="20dp"
+	                    android:layout_marginLeft="10dp"
+	                    android:textColor="@color/blue_dark"/>
+	                
+	                <Spinner 
+		                android:id="@+id/consumo_spinner_tipo"
+		                android:layout_width="120dp"
+		                android:layout_height="50dp"
+		                android:layout_gravity="right|center_vertical"
+		                android:layout_marginRight="10dp"/>
+	                
+	            </FrameLayout>
+	            
+	            <FrameLayout 
+	                android:layout_width="match_parent"
+	                android:layout_height="70dp">
+	                
+	                <TextView
+	                    android:id="@+id/consumo_data_label"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_gravity="left|center_vertical"
+	                    android:gravity="left|center_vertical"
+	                    android:layout_marginLeft="10dp"
+	                    android:textSize="20dp"
+	                    android:textColor="@color/blue_dark"/>
+	                
+	                <EditText 
+		                android:id="@+id/consumo_data_edittext"
+		                android:layout_width="150dp"
+		                android:layout_height="50dp"
+		                android:layout_gravity="right|center_vertical"
+		                android:gravity="center"
+		                android:layout_marginRight="10dp"
+		                android:focusable="false"
+		                android:textSize="20dp"
+		                android:onClick="dataButtonClicked"/>
+	                
+	            </FrameLayout>
+	            
+	            
+	            
+	            
+	        </LinearLayout>
+	        <!-- houses list -->
+	        
+	        <!-- Linha Divisória -->
+	        <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="1dp"
+	            android:background="@color/blue_dark"/>
+	        
+	        <ListView 
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:id="@+id/consumo_listView"
+		        android:layout_weight="1">
+		        
+		    </ListView>
+	        
+	    </LinearLayout>
 	    
 	    <!-- Linha Divisória -->
 	    <TextView 
@@ -42,19 +119,6 @@
 	            
 	        </FrameLayout>
 	        
-	        <!-- Linha Divisória -->
-	        <TextView 
-	            android:layout_width="match_parent"
-	            android:layout_height="1dp"
-	            android:background="@color/blue_dark"/>
-	        
-	        <!-- Escolha Tipo -->
-	        <LinearLayout 
-	            android:layout_width="match_parent"
-	            android:layout_height="80dp"
-	            android:background="@color/blue_pale">
-	            
-	        </LinearLayout>
 	    </LinearLayout>
 	    
 	</LinearLayout>

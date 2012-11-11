@@ -1,6 +1,7 @@
 package com.poli.gfx.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -58,12 +59,12 @@ public class Residencia {
 		this._estado = estado;
 	}
 	
-	public void adicionarMedida(double potencia, Date inicio, Date termino){
+	public void adicionarMedida(double potencia, Calendar inicio, Calendar termino){
 		_medidas.add(new Medida(potencia, inicio, termino));
 		Collections.sort(_medidas, _comparador);
 	}
 	
-	public XYSeries geraDadosGráficoConsumoData(Date data){
+	public XYSeries geraDadosGráficoConsumoData(Calendar data){
 		ArrayList<Medida> medidasDoDia = getMedidasData (data);
 		Medida m;
 		Collections.sort(medidasDoDia, _comparador);
@@ -85,13 +86,13 @@ public class Residencia {
 		return series;
 	}
 	
-	private ArrayList<Medida> getMedidasData(Date data){
+	private ArrayList<Medida> getMedidasData(Calendar data){
 		ArrayList<Medida> medidas = new ArrayList<Medida>();
-		Date dataMedida;
+		Calendar dataMedida;
 		
 		for (Medida m : _medidas){
 			dataMedida = m.getInicioMedida();
-			if (data.getDate() == dataMedida.getDate() && data.getMonth() == dataMedida.getMonth() && data.getYear() == dataMedida.getYear()){
+			if (data.get(Calendar.DAY_OF_MONTH) == dataMedida.get(Calendar.DAY_OF_MONTH) && data.get(Calendar.MONTH) == dataMedida.get(Calendar.MONTH) && data.get(Calendar.YEAR) == dataMedida.get(Calendar.YEAR)){
 				medidas.add(m);
 			}
 		}
@@ -105,4 +106,45 @@ public class Residencia {
 		}
 		
 	}
+	
+	
+	//Medidas do mes
+	public XYSeries geraDadosGráficoConsumoMes(Calendar data){
+		//TODO
+		
+		
+		
+		
+		ArrayList<Medida> medidasDoDia;
+		Medida m;
+		SimpleXYSeries series = new SimpleXYSeries(_nomeCasa);
+		double consumoDia;
+		
+//		?for (int i = 0 ; i < medidasDoMes.size() ; i++){
+//			m = medidasDoMes.get(i);
+//			series.addFirst(new Double(m.getHoraDoDiaInicio()),new Double(m.getConsumoEmkWh()));
+//		}
+//		Log.d(TAG, String.format("Gerando dados casa= %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
+		return series;
+	}
+	
+	//Medidas do mes
+		public XYSeries geraDadosGráficoConsumoAno(Calendar data){
+			//TODO
+			
+			
+			
+			ArrayList<Medida> medidasDoDia;
+			Medida m;
+			SimpleXYSeries series = new SimpleXYSeries(_nomeCasa);
+			double consumoDia;
+			
+//			?for (int i = 0 ; i < medidasDoMes.size() ; i++){
+//				m = medidasDoMes.get(i);
+//				series.addFirst(new Double(m.getHoraDoDiaInicio()),new Double(m.getConsumoEmkWh()));
+//			}
+//			Log.d(TAG, String.format("Gerando dados casa= %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
+			return series;
+		}
+	
 }
