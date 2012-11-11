@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.hyvee.android"
+	style="@style/MainWindow">
+
+	<ScrollView 
+		android:id="@+id/scroll"
+		style="@style/ScrollContent">
+
+		<LinearLayout 
+			style="@style/LinearLayoutWrap">
+			
+		    <LinearLayout style="@style/LinearLayoutContent">
+		    
+		        
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		            android:gravity="center"
+		            android:layout_weight="1">
+		            
+		            <Button 
+			            style="@style/Widget.Button.SquareBlue"
+			            android:layout_width="400dp"
+			            android:layout_height="80dp"
+			            android:text="Medidas"
+			            android:textSize="30dp"
+			            android:layout_gravity="center"
+			            android:onClick="medidasButtonClicked"/>
+		            
+		            <!-- Espaçador -->
+		            <View
+		                android:layout_width="40dp"
+		                android:layout_height="match_parent"/>
+			        
+			        <Button 
+			            style="@style/Widget.Button.SquareBlue"
+			            android:layout_width="400dp"
+			            android:layout_height="80dp"
+			            android:text="Minhas Casas"
+			            android:textSize="30dp"
+			            android:layout_gravity="center"
+			            android:onClick="minhasCasasButtonClicked"/>
+		            
+		        </LinearLayout>
+		        
+		        <LinearLayout 
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal"
+		           	android:gravity="center"
+		           	android:layout_weight="1">
+			        
+		            <Button 
+			            style="@style/Widget.Button.SquareBlue"
+			            android:layout_width="400dp"
+			            android:layout_height="80dp"
+			            android:text="Opções"
+			            android:textSize="30dp"
+			            android:layout_gravity="center"/>
+		            
+		            <!-- Espaçador -->
+		            <View
+		                android:layout_width="40dp"
+		                android:layout_height="match_parent"/>
+			        
+			        <Button 
+			            style="@style/Widget.Button.SquareBlue"
+			            android:layout_width="400dp"
+			            android:layout_height="80dp"
+			            android:text="Sobre"
+			            android:textSize="30dp"
+			            android:layout_gravity="center"
+			            android:onClick="sobreButtonClicked"/>
+		            
+		        </LinearLayout>
+		        
+		        
+		    </LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+
+	<!-- header -->
+	<include layout="@layout/include_header" android:id="@+id/header" />
+
+
+</FrameLayout>
