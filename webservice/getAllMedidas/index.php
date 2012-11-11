@@ -39,10 +39,10 @@ function getGFXAccount(){	*/
 		@mysql_select_db($database) or die('Unable to select database');
 		mysql_query("SET NAMES 'utf8'");
 	
-		$query = "SELECT * FROM medidas WHERE house_id='".$houseId."'";
+		$query = "SELECT * FROM medidas_".$houseId;
 		$result = mysql_query($query);
-		$num_rows =  mysql_num_rows($result);
-		if($result  && $num_rows > 0){
+		if($result  && mysql_num_rows($result) > 0){
+			$num_rows = mysql_num_rows($result);
 			$response["status"] = "true";
 			
 			$medidas = array();
@@ -50,10 +50,10 @@ function getGFXAccount(){	*/
 			for($i = 0 ; $i < $num_rows ; $i++){
 				$row = mysql_fetch_array($result, MYSQL_ASSOC);
 				
-				$medida_pot = $row["potencia"];
+				$medida_pot = $row["consumo"];
 				$medida_inicio = $row["inicio_medida"];
 				
-				$medida["potencia"] = $medida_pot;
+				$medida["consumo"] = $medida_pot;
 				$medida["inicio"] = $medida_inicio;
 				
 				$medidas[] = $medida;
