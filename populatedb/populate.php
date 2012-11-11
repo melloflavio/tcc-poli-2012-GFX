@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title>Populate measures table</title>
@@ -5,17 +6,14 @@
 <body>
 <?php
 
+//include SQL connection data. EDIT config.php!!!
+include("config.php");
 $timestamp = date("U", mktime(4, 30, 0, 8, 21, 2012));
 $currenttime=time();
 $potencia = 30;
 $posto = 0;
 $login = "situationmmike";
 
-
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
-define('DB_DATABASE', 'php_login');
 //Connect to mysql server
 $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if(!$link) {
@@ -95,12 +93,19 @@ while ($timestamp <= $currenttime){
 	//generate new power value
 	$potencia = generatevalue($timestamp,$potencia);
 	//insert into DB
-	$qry = "INSERT INTO medidas(login,timestamp,potencia,posto) VALUES('$login','$timestamp','$potencia','$posto')";
+	$qry = "INSERT INTO medidas(login,timestamp,potencia,posto) VALUES('$login','$timestamp',$potencia,'$posto')";
 	$result = @mysql_query($qry);
-
+	if ($result){
+		echo date("Y-m-d H:i:s",$timestamp)."  medida: ".number_format($potencia,2)."KWh  inserido com sucesso!!! <br/>";
+	}
+	else
+	{
+		die('Failed to insert values: ' . mysql_error()); 
+	}
+	echo $result;
 	//increment time in 15 mins
 	$timestamp = $timestamp + 60*15;
-	echo date(DATE_RFC822,$timestamp)."  ".$potencia."<br/>";
+	
 }
 ?>
 
