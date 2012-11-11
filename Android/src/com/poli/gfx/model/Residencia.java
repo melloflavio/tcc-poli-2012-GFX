@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
 
 import android.util.Log;
 
@@ -82,7 +83,7 @@ public class Residencia {
 			series.addFirst(new Double(m.getHoraDoDiaInicio()),new Double(m.getConsumoEmkWh()));
 		}
 //		SimpleXYSeries series = new SimpleXYSeries(horas, consumo, _nomeCasa);
-		Log.d(TAG, String.format("Gerando dados casa= %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
+//		Log.d(TAG, String.format("Gerando dados casa= %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
 		return series;
 	}
 	
@@ -93,6 +94,19 @@ public class Residencia {
 		for (Medida m : _medidas){
 			dataMedida = m.getInicioMedida();
 			if (data.get(Calendar.DAY_OF_MONTH) == dataMedida.get(Calendar.DAY_OF_MONTH) && data.get(Calendar.MONTH) == dataMedida.get(Calendar.MONTH) && data.get(Calendar.YEAR) == dataMedida.get(Calendar.YEAR)){
+				medidas.add(m);
+			}
+		}
+		return medidas;
+	}
+	
+	private ArrayList<Medida> getMedidasMes(Calendar data){
+		ArrayList<Medida> medidas = new ArrayList<Medida>();
+		Calendar dataMedida;
+		
+		for (Medida m : _medidas){
+			dataMedida = m.getInicioMedida();
+			if (data.get(Calendar.MONTH) == dataMedida.get(Calendar.MONTH) && data.get(Calendar.YEAR) == dataMedida.get(Calendar.YEAR)){
 				medidas.add(m);
 			}
 		}
@@ -112,20 +126,32 @@ public class Residencia {
 	public XYSeries geraDadosGráficoConsumoMes(Calendar data){
 		//TODO
 		
-		
-		
-		
-		ArrayList<Medida> medidasDoDia;
-		Medida m;
+		int month = data.get(Calendar.MONTH);
 		SimpleXYSeries series = new SimpleXYSeries(_nomeCasa);
-		double consumoDia;
+		Calendar c = Calendar.getInstance();
+		c.setTimeInMillis(data.getTimeInMillis());
+		c.set(Calendar.DAY_OF_MONTH, 1);
 		
-//		?for (int i = 0 ; i < medidasDoMes.size() ; i++){
-//			m = medidasDoMes.get(i);
-//			series.addFirst(new Double(m.getHoraDoDiaInicio()),new Double(m.getConsumoEmkWh()));
-//		}
-//		Log.d(TAG, String.format("Gerando dados casa= %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
+		while (c.get(Calendar.MONTH) == month){
+			series.addLast(c.get(Calendar.DAY_OF_MONTH), calculaConsumoDia(c));
+			
+			c.add(Calendar.DAY_OF_MONTH, 1);
+		}
+		Log.d(TAG, String.format("Gerando dados casa mes = %s tamanho = %d", _nomeCasa, series.size()));
 		return series;
+	}
+	
+	private double calculaConsumoDia(Calendar dia){
+		double consumo = 0.0;
+		
+		ArrayList<Medida> medidasDoDia = getMedidasData (dia);
+		
+		for(Medida m : medidasDoDia){
+			consumo += m.getConsumoEmkWh();
+		}
+		
+		return consumo;
+		
 	}
 	
 	//Medidas do mes
@@ -134,17 +160,32 @@ public class Residencia {
 			
 			
 			
-			ArrayList<Medida> medidasDoDia;
-			Medida m;
+			int year = data.get(Calendar.YEAR);
 			SimpleXYSeries series = new SimpleXYSeries(_nomeCasa);
-			double consumoDia;
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(data.getTimeInMillis());
+			c.set(Calendar.MONTH, Calendar.JANUARY);
 			
-//			?for (int i = 0 ; i < medidasDoMes.size() ; i++){
-//				m = medidasDoMes.get(i);
-//				series.addFirst(new Double(m.getHoraDoDiaInicio()),new Double(m.getConsumoEmkWh()));
-//			}
-//			Log.d(TAG, String.format("Gerando dados casa= %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
+			while (c.get(Calendar.YEAR) == year){
+				series.addLast(c.get(Calendar.MONTH) + 1, calculaConsumoMes(c));
+				
+				c.add(Calendar.MONTH, 1);
+			}
+			Log.d(TAG, String.format("Gerando dados casa ano = %s tamanho = %d", _nomeCasa, series.size()));
 			return series;
+		}
+		
+		private double calculaConsumoMes(Calendar dia){
+			double consumo = 0.0;
+			
+			ArrayList<Medida> medidasDoMes = getMedidasMes (dia);
+			
+			for(Medida m : medidasDoMes){
+				consumo += m.getConsumoEmkWh();
+			}
+			
+			return consumo;
+			
 		}
 	
 }

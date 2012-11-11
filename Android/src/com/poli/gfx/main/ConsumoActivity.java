@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,6 +61,8 @@ public class ConsumoActivity extends Activity{
 	
 	private Calendar _datePicked;
 	
+	private ProgressDialog mProgressDialog;
+	
 	//Activity lifecycle
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,16 +102,29 @@ public class ConsumoActivity extends Activity{
 //        getHousesFromSharedPrefs();
         setColors();
         
-        geraSeriesConsumoDia();
-        
-        
         
         mListView = (ListView) findViewById(R.id.consumo_listView);
         mListView.setAdapter(new ListAdapter());
         
-        drawGraph();
+//        drawGraph();
     }
     
+    
+    @Override
+    protected void onResume(){
+    	super.onResume();
+    	
+    	showProgressDialog("Carregando Dados");
+//    	geraSeriesConsumoDia();
+    	//Testing
+        //TODO
+        _residencias = geraDadosResidência();
+        
+    	hideProgressDialog();
+    	
+    	drawGraph();
+    }
+
     @Override
    	protected void onDestroy() {
    		if (isFinishing()) {
@@ -125,11 +141,7 @@ public class ConsumoActivity extends Activity{
         
         _spinnerTipo = (Spinner) findViewById(R.id.consumo_spinner_tipo);
         
-        
-        //Testing
-        //TODO
-        _residencias = geraDadosResidência();
-        
+        _residencias = new ArrayList<Residencia>();
         
         //TODO
         mDrawGraphStates = new ArrayList<Boolean>();
@@ -152,7 +164,7 @@ public class ConsumoActivity extends Activity{
         	houseId= SharedPreferencesAdapter.getStringFromSharedPreferences(SharedPreferencesAdapter.BASE_HOUSE_ID_KEY+i, getApplicationContext());
         	
         	if(houseName != null && houseId != null){
-        		Log.d(TAG, "house found! id = "+houseId+" name = "+houseName);
+//        		Log.d(TAG, "house found! id = "+houseId+" name = "+houseName);
 //        		mHouseIds.add(houseId);
 //        		mHouseNames.add(houseName);
         		mDrawGraphStates.add(Boolean.valueOf(true));
@@ -231,7 +243,6 @@ public class ConsumoActivity extends Activity{
 			convertView.setOnClickListener(new OnClickListener() {
 				
 				public void onClick(View v) {
-					Log.d(TAG, "AW YEAH!!!"+position);
 //					((CheckBox)v.findViewById(R.id.consumo_list_checkBox)).setChecked(true);
 					CheckBox c = ((CheckBox)v.findViewById(R.id.consumo_list_checkBox));
 					c.toggle();
@@ -318,7 +329,6 @@ private void drawGraphMes(){
     	_mainXYPlot.setRangeStep(XYStepMode.SUBDIVIDE, 5);
     	_mainXYPlot.setRangeValueFormat(new DecimalFormat("#"));
     	_mainXYPlot.setRangeLabel("Potência consumida (kWh)");
-    	Log.d(TAG, "Top Max = "+_mainXYPlot.getRangeTopMax());
     	_mainXYPlot.setRangeBoundaries(0, 60, BoundaryMode.FIXED);
     	
     	
@@ -352,7 +362,6 @@ private void drawGraphAno(){
 	_mainXYPlot.setRangeStep(XYStepMode.SUBDIVIDE, 5);
 	_mainXYPlot.setRangeValueFormat(new DecimalFormat("#"));
 	_mainXYPlot.setRangeLabel("Potência consumida (kWh)");
-	Log.d(TAG, "Top Max = "+_mainXYPlot.getRangeTopMax());
 	_mainXYPlot.setRangeBoundaries(0, 2000, BoundaryMode.FIXED);
 	
 	
@@ -370,15 +379,15 @@ private void drawGraphAno(){
     	r.setNomeCasa("Casa 1");
     	Calendar horaInicio = Calendar.getInstance();
     	Calendar horaTermino = Calendar.getInstance();
-    	for (int i = 0 ; i < 48 ; i++){
-    		horaInicio = Calendar.getInstance();
-    		horaTermino = Calendar.getInstance();
-    		horaInicio.set(2012, 10, 11, i/2, (i*30)%60);
-    		horaTermino.set(2012, 10, 11, i/2, 15 + (i*30)%60);
-    		Log.d(TAG, String.format("Inicio %d:%d", horaInicio.get(Calendar.HOUR_OF_DAY), horaInicio.get(Calendar.MINUTE)));
-//    		horaInicio = new Date(2012, 11, 20, i/2, (i*30)%60);
-//    		horaTermino = new Date(2012, 11, 20, i/2, 15 + (i*30)%60);
-    		r.adicionarMedida(i*3.0, horaInicio, horaTermino); 
+	    for (int dia = 1 ; dia < 31 ; dia++){
+    		for (int i = 0 ; i < 48 ; i++){
+	    		horaInicio = Calendar.getInstance();
+	    		horaTermino = Calendar.getInstance();
+	    		horaInicio.set(2012, 10, dia, i/2, (i*30)%60);
+	    		horaTermino.set(2012, 10, dia, i/2, 15 + (i*30)%60);
+	    		
+	    		r.adicionarMedida(i*(5.0*2.0)/48.0, horaInicio, horaTermino); 
+	    	}
     	}
     	residencias.add(r);
     	
@@ -481,5 +490,19 @@ private void drawGraphAno(){
     	} else if (index == INDICE_DIA){
     		t.setText(String.format("%s/%s/%s", _datePicked.get(Calendar.DAY_OF_MONTH), _datePicked.get(Calendar.MONTH)+1, _datePicked.get(Calendar.YEAR)));
     	}
+    }
+    
+  //Dialogs
+    private void showProgressDialog(String mensagem){
+    	if(mProgressDialog != null && mProgressDialog.isShowing())
+    	{
+    		mProgressDialog.dismiss();
+    	}
+    	mProgressDialog = ProgressDialog.show(this, "", mensagem);
+    }
+    
+    private void hideProgressDialog(){
+    	Log.d(TAG, "Hiding Progress Dialog");
+    	mProgressDialog.dismiss();
     }
 }
