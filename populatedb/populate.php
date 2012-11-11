@@ -88,7 +88,13 @@ function generatevalue ($timestamp,$oldvalue){
 
 echo "<p>Initial UTC: ".$timestamp."</p><p>Final UTC: ".$currenttime."</p>";
 
-
+//TRUNCATE medidas
+$qry = "TRUNCATE medidas";
+$result = @mysql_query($qry);
+if ($result){
+		echo "Valores antigos removidos com sucesso!!! <br/>";
+	}
+	
 while ($timestamp <= $currenttime){
 	//generate new power value
 	$potencia = generatevalue($timestamp,$potencia);
