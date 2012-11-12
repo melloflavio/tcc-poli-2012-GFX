@@ -8,8 +8,11 @@
 
 //include SQL connection data. EDIT config.php!!!
 include("config.php");
-$timestamp = date("U", mktime(4, 30, 0, 8, 21, 2012));
-$currenttime=time();
+$timestamp = strtotime($_POST['date']); 
+echo "<h1>Programa de Inserção de Dados</h1>";
+echo "<h3>Inserindo a partir de: ".$_POST['date']."</h3>";
+
+$currenttime = time();
 $potencia = 30;
 $posto = 0;
 $login = "situationmmike";
@@ -94,21 +97,24 @@ $result = @mysql_query($qry);
 if ($result){
 		echo "Valores antigos removidos com sucesso!!! <br/>";
 	}
-	
+
 while ($timestamp <= $currenttime){
 	//generate new power value
+	$fator_potencia = 0.9732*(1+fprand(0,0.03,3)-0.015);
 	$potencia = generatevalue($timestamp,$potencia);
 	//insert into DB
-	$qry = "INSERT INTO medidas(login,timestamp,potencia,posto) VALUES('$login','$timestamp',$potencia,'$posto')";
+	//echo $timestamp."<br/>";
+	$sqltime = date("Y-m-d H:i:s",$timestamp);
+	$qry = "INSERT INTO medidas_(consumo,fator_potencia,tipo_tarifa,inicio_medida) VALUES('$potencia','$fator_potencia','1','$sqltime')";
 	$result = @mysql_query($qry);
 	if ($result){
-		echo date("Y-m-d H:i:s",$timestamp)."  medida: ".number_format($potencia,2)."KWh  inserido com sucesso!!! <br/>";
+		echo date("Y-m-d H:i:s",$timestamp)."  medida: ".number_format($potencia,2)." Wh  inserido com sucesso!!!<br/>";
 	}
 	else
 	{
 		die('Failed to insert values: ' . mysql_error()); 
 	}
-	echo $result;
+	//echo $result;
 	//increment time in 15 mins
 	$timestamp = $timestamp + 60*15;
 	

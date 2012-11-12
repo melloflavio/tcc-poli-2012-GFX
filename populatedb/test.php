@@ -4,12 +4,23 @@
 </head>
 <body>
 <?php
+//$timepost = $_POST['date']; 
 $timestamp = //unix time stamp
 $hour = 0;
 $minute = 0;
 $second = 0;
 $day = 0;
 $month = 0;
+
+$timestamp = strtotime("12/25/2012");
+echo $timestamp;
+echo 
+$month = substr($timepost,"0","2");
+$day = substr($timepost,"3","2");;
+$year = substr($timepost,"6","4");
+
+echo $year." ".$month." ".$day."\nn";
+//$timepost = mkti
 //for ($time=)
 function isleapyear($year)
 {
