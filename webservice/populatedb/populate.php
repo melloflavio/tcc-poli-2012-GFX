@@ -103,7 +103,7 @@ while ($timestamp <= $currenttime){
 	$fator_potencia = 0.9732*(1+fprand(0,0.03,3)-0.015);
 	$potencia = generatevalue($timestamp,$potencia);
 	//insert into DB
-	echo $timestamp."<br/>";
+	//echo $timestamp."<br/>";
 	$sqltime = date("Y-m-d H:i:s",$timestamp);
 	$qry = "INSERT INTO medidas_(consumo,fator_potencia,tipo_tarifa,inicio_medida) VALUES('$potencia','$fator_potencia','1','$sqltime')";
 	$result = @mysql_query($qry);
