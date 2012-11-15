@@ -8,17 +8,42 @@ CREATE TRIGGER `after_insert_medidas`
 			`house_id`,
 			`dia_medida`,
 			`consumo`,
-			`fator_potencia`,
+			`fator_potencia_dia`,
+			`soma_intervalos`,
 			`tipo_tarifa`)  
 		VALUES (
 			NEW.user_id,
 			NEW.house_id,
 			DATE(NEW.inicio_medida), 
-			NEW.consumo*NEW.intervalo_demanda/'1440',
-			NEW.fator_potencia*NEW.intervalo_demanda/'1440',
+			NEW.consumo*NEW.intervalo_demanda*NEW.fator_potencia/'60',
+			NEW.fator_potencia,
+			NEW.intervalo_demanda,
 			NEW.tipo_tarifa
 		)
 		ON DUPLICATE KEY update
-		consumo = consumo + NEW.consumo*NEW.intervalo_demanda/'1440',
-		fator_potencia = fator_potencia + NEW.fator_potencia*NEW.intervalo_demanda/'1440';
+		fator_potencia_dia = (fator_potencia_dia*soma_intervalos + NEW.fator_potencia*NEW.intervalo_demanda)/(soma_intervalos + NEW.intervalo_demanda),
+		soma_intervalos = soma_intervalos + NEW.intervalo_demanda,
+		consumo = consumo + NEW.consumo*NEW.intervalo_demanda/'60';
+		
+	INSERT INTO medidas_mes (
+			`user_id`,
+			`house_id`,
+			`mes_medida`,
+			`consumo`,
+			`fator_potencia_mes`,
+			`soma_intervalos`,
+			`tipo_tarifa`)  
+		VALUES (
+			NEW.user_id,
+			NEW.house_id,
+			LAST_DAY(DATE(NEW.inicio_medida)), 
+			NEW.consumo*NEW.intervalo_demanda*NEW.fator_potencia/'60',
+			NEW.fator_potencia,
+			NEW.intervalo_demanda,
+			NEW.tipo_tarifa
+		)
+		ON DUPLICATE KEY update
+		consumo = consumo + NEW.consumo*NEW.intervalo_demanda/'60',
+		soma_intervalos = soma_intervalos + NEW.intervalo_demanda,
+		fator_potencia_mes = (fator_potencia_mes*soma_intervalos + NEW.fator_potencia*NEW.intervalo_demanda)/(soma_intervalos + NEW.intervalo_demanda);
     END;$$
