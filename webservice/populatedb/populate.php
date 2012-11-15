@@ -92,7 +92,48 @@ function generatevalue ($timestamp,$oldvalue){
 echo "<p>Initial UTC: ".$timestamp."</p><p>Final UTC: ".$currenttime."</p>";
 
 //TRUNCATE medidas
-$qry = "TRUNCATE medidas";
+$qry = "ALTER TABLE medidas_dia 
+DROP FOREIGN KEY FK_collected_for;
+
+ALTER TABLE medidas_dia 
+DROP FOREIGN KEY FK_collected_at;
+
+ALTER TABLE medidas_mes 
+DROP FOREIGN KEY FK_gathered_for;
+
+ALTER TABLE medidas_mes 
+DROP FOREIGN KEY FK_gathered_at;
+
+## Remover Dados
+TRUNCATE medidas_mes;
+TRUNCATE medidas_dia;
+TRUNCATE medidas;
+
+## Voltar Restrições
+
+ALTER TABLE medidas_dia 
+ADD CONSTRAINT FK_collected_for
+FOREIGN KEY (user_id) REFERENCES medidas(user_id)  
+ON UPDATE CASCADE  
+ON DELETE CASCADE;
+
+ALTER TABLE medidas_dia 
+ADD CONSTRAINT FK_collected_at
+FOREIGN KEY (house_id) REFERENCES medidas(house_id)  
+ON UPDATE CASCADE  
+ON DELETE CASCADE;
+
+ALTER TABLE medidas_mes 
+ADD CONSTRAINT FK_gathered_for
+FOREIGN KEY (user_id) REFERENCES medidas_dia(user_id)  
+ON UPDATE CASCADE  
+ON DELETE CASCADE;
+
+ALTER TABLE medidas_mes 
+ADD CONSTRAINT FK_gathered_at
+FOREIGN KEY (house_id) REFERENCES medidas_dia(house_id)  
+ON UPDATE CASCADE  
+ON DELETE CASCADE;";
 $result = @mysql_query($qry);
 if ($result){
 		echo "Valores antigos removidos com sucesso!!! <br/>";
@@ -102,10 +143,27 @@ while ($timestamp <= $currenttime){
 	//generate new power value
 	$fator_potencia = 0.9732*(1+fprand(0,0.03,3)-0.015);
 	$potencia = generatevalue($timestamp,$potencia);
+	$potencia = number_format($potencia, '3');
 	//insert into DB
 	//echo $timestamp."<br/>";
 	$sqltime = date("Y-m-d H:i:s",$timestamp);
-	$qry = "INSERT INTO medidas_(consumo,fator_potencia,tipo_tarifa,inicio_medida) VALUES('$potencia','$fator_potencia','1','$sqltime')";
+	//$qry = "INSERT INTO medidas_(consumo,fator_potencia,tipo_tarifa,inicio_medida) VALUES('$potencia','$fator_potencia','1','$sqltime')";
+	$qry = "INSERT INTO `medidas`(
+		 `user_id`,
+		 `house_id`,
+		 `inicio_medida`,
+		 `intervalo_demanda`,
+		 `consumo`,
+		 `fator_potencia`,
+ 		 `tipo_tarifa`) 
+ 	VALUES (
+ 		'1',
+ 		'1',
+ 		'$sqltime',
+ 		'15',
+ 		'$potencia',
+ 		'$fator_potencia',
+ 		'1')";
 	$result = @mysql_query($qry);
 	if ($result){
 		echo date("Y-m-d H:i:s",$timestamp)."  medida: ".number_format($potencia,2)." Wh  inserido com sucesso!!!<br/>";
