@@ -19,5 +19,6 @@ CREATE TRIGGER `after_insert_medidas`
 			NEW.tipo_tarifa
 		)
 		ON DUPLICATE KEY update
-		consumo = consumo + NEW.consumo*NEW.intervalo_demanda/'1440';
+		consumo = consumo + NEW.consumo*NEW.intervalo_demanda/'1440',
+		fator_potencia = fator_potencia + NEW.fator_potencia*NEW.intervalo_demanda/'1440';
     END;$$
