@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 15, 2012 at 04:31 PM
+-- Generation Time: Nov 20, 2012 at 01:26 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -19,6 +19,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `tcc_gfx`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `distribuidoras`
+--
+
+CREATE TABLE IF NOT EXISTS `distribuidoras` (
+  `distribuidora_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tarifa_convencional` double NOT NULL,
+  `tarifa_ponta` double NOT NULL,
+  `tarifa_foraponta` double NOT NULL,
+  `tarifa_intermediaria` double NOT NULL,
+  `razao_social` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `cidade` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `estado` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`distribuidora_id`),
+  UNIQUE KEY `house_id` (`distribuidora_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -63,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `medidas` (
   `consumo` double NOT NULL,
   `fator_potencia` double NOT NULL,
   `tipo_tarifa` int(11) NOT NULL,
-  `fatura_medida` double NOT NULL,
+  `fatura_parcial_medida` double NOT NULL,
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`,`house_id`,`inicio_medida`),
   KEY `FK_measured_at` (`house_id`)
@@ -73,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `medidas` (
 -- Triggers `medidas`
 --
 DROP TRIGGER IF EXISTS `after_insert_medidas`;
-DELIMITER $$
+DELIMITER //
 CREATE TRIGGER `after_insert_medidas` AFTER INSERT ON `medidas`
  FOR EACH ROW BEGIN  
 		INSERT INTO medidas_dia (
@@ -119,7 +138,8 @@ CREATE TRIGGER `after_insert_medidas` AFTER INSERT ON `medidas`
 		consumo = consumo + NEW.consumo*NEW.intervalo_demanda/'60',
 		soma_intervalos = soma_intervalos + NEW.intervalo_demanda,
 		fator_potencia_mes = (fator_potencia_mes*soma_intervalos + NEW.fator_potencia*NEW.intervalo_demanda)/(soma_intervalos + NEW.intervalo_demanda);
-    END; $$
+    END
+//
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -134,6 +154,7 @@ CREATE TABLE IF NOT EXISTS `medidas_dia` (
   `dia_medida` date NOT NULL,
   `consumo` double NOT NULL,
   `fator_potencia_dia` double NOT NULL,
+  `fatura_parcial_dia` double NOT NULL,
   `soma_intervalos` int(11) DEFAULT NULL,
   `tipo_tarifa` int(11) NOT NULL,
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
@@ -153,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `medidas_mes` (
   `mes_medida` date NOT NULL,
   `consumo` double NOT NULL,
   `fator_potencia_mes` double NOT NULL,
+  `fatura_mes` double NOT NULL,
   `soma_intervalos` int(11) DEFAULT NULL,
   `tipo_tarifa` int(11) NOT NULL,
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
@@ -173,6 +195,8 @@ CREATE TABLE IF NOT EXISTS `residencias` (
   `cidade` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `estado` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
+  `tipo_tarifa` int(11) NOT NULL,
+  `distribuidora_id` int(11) NOT NULL,
   PRIMARY KEY (`house_id`),
   UNIQUE KEY `house_id` (`house_id`),
   KEY `FK_belongs_to` (`user_id`),
@@ -183,9 +207,9 @@ CREATE TABLE IF NOT EXISTS `residencias` (
 -- Dumping data for table `residencias`
 --
 
-INSERT INTO `residencias` (`house_id`, `nome_casa`, `logradouro`, `cidade`, `estado`, `user_id`) VALUES
-(1, 'Casa Uno', 'Alberto Faria, 1946', 'Sao Paulo', 'SP', 1),
-(2, 'Maloca Due', 'Arruda Botelho', 'Sobradinho', 'MG', 1);
+INSERT INTO `residencias` (`house_id`, `nome_casa`, `logradouro`, `cidade`, `estado`, `user_id`,`tipo_tarifa`, `distribuidora_id`) VALUES
+(1, 'Casa Uno', 'Alberto Faria, 1946', 'Sao Paulo', 'SP', 1, 1, 1),
+(2, 'Maloca Due', 'Arruda Botelho', 'Sobradinho', 'MG', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -215,13 +239,6 @@ INSERT INTO `users` (`user_id`, `email`, `password`) VALUES
 --
 
 --
--- Constraints for table `medidas`
---
-ALTER TABLE `medidas`
-  ADD CONSTRAINT `FK_measured_at` FOREIGN KEY (`house_id`) REFERENCES `residencias` (`house_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_measured_for` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `medidas_dia`
 --
 ALTER TABLE `medidas_dia`
@@ -234,12 +251,6 @@ ALTER TABLE `medidas_dia`
 ALTER TABLE `medidas_mes`
   ADD CONSTRAINT `FK_gathered_at` FOREIGN KEY (`house_id`) REFERENCES `medidas_dia` (`house_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_gathered_for` FOREIGN KEY (`user_id`) REFERENCES `medidas_dia` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `residencias`
---
-ALTER TABLE `residencias`
-  ADD CONSTRAINT `FK_belongs_to` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
