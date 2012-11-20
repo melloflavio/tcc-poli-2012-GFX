@@ -5,4 +5,4 @@ INSERT INTO `medidas`
  `intervalo_demanda`,
  `consumo`,
  `fator_potencia`,
- `tipo_tarifa`) VALUES ('2','2','2013-02-02 00:00:30','15','500','0.720','1')
+ `tipo_tarifa`) VALUES ('2','2','2013-02-02 00:00:40','15','500','0.720','1')

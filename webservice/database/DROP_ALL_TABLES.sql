@@ -21,9 +21,11 @@ DROP TABLE IF EXISTS medidas_mes ;
 DROP TABLE IF EXISTS medidas_dia;
 
 DROP TABLE IF EXISTS medidas;
- 
-DROP TABLE IF EXISTS users;
 
 DROP TABLE IF EXISTS residencias;
 
+DROP TABLE IF EXISTS distribuidoras;
+
 DROP TABLE IF EXISTS feriados;
+
+DROP TABLE IF EXISTS users;
