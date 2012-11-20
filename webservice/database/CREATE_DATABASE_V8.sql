@@ -49,12 +49,14 @@ DROP TABLE IF EXISTS `tcc_gfx`.`users` ;
 
 CREATE  TABLE IF NOT EXISTS `tcc_gfx`.`users` (
   `user_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `fname` VARCHAR(64) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
+  `lname` VARCHAR(64) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
   `email` VARCHAR(64) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
-  `password` VARCHAR(16) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
+  `password` VARCHAR(32) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
   PRIMARY KEY (`user_id`) ,
   UNIQUE INDEX `user_id` (`user_id` ASC) )
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 

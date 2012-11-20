@@ -11,9 +11,9 @@ INSERT INTO `feriados` (`data`, `descritivo`) VALUES
 ('2012-11-15', 'Proclamação da República'),
 ('2012-11-25', 'Natal');
 
-INSERT INTO `users` (`user_id`, `email`, `password`) VALUES
-(1, '@', 'qwerty'),
-(2, '@2', 'qwerty');
+INSERT INTO `users` (`fname`, `lname`, `email`, `password`) VALUES
+('John','Smith','@', 'qwerty'),
+('João','Malaquias','jm@org.gov', 'qwerty');
 
 INSERT INTO `distribuidoras`(`distribuidora_id`, `sigla_distribuidora`, `razao_social`, `date_from`, `date_to`, `tarifa_convencional`, `tarifa_ponta`, `tarifa_foraponta`, `tarifa_intermediaria`, `cidade`, `estado`) VALUES (1,' ELETROPAULO','Eletropaulo Metropolitana Eletricidade de São Paulo S/A',date('2010-07-04'),date('2013-07-04'),0.29114,0.472416,0.274660,0.373538,'Sao Paulo','SP');
 
