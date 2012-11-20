@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `medidas` (
   `consumo` double NOT NULL,
   `fator_potencia` double NOT NULL,
   `tipo_tarifa` int(11) NOT NULL,
+  `fatura_medida` double NOT NULL,
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`,`house_id`,`inicio_medida`),
   KEY `FK_measured_at` (`house_id`)
@@ -72,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `medidas` (
 -- Triggers `medidas`
 --
 DROP TRIGGER IF EXISTS `after_insert_medidas`;
-DELIMITER //
+DELIMITER $$
 CREATE TRIGGER `after_insert_medidas` AFTER INSERT ON `medidas`
  FOR EACH ROW BEGIN  
 		INSERT INTO medidas_dia (
@@ -118,8 +119,7 @@ CREATE TRIGGER `after_insert_medidas` AFTER INSERT ON `medidas`
 		consumo = consumo + NEW.consumo*NEW.intervalo_demanda/'60',
 		soma_intervalos = soma_intervalos + NEW.intervalo_demanda,
 		fator_potencia_mes = (fator_potencia_mes*soma_intervalos + NEW.fator_potencia*NEW.intervalo_demanda)/(soma_intervalos + NEW.intervalo_demanda);
-    END
-//
+    END; $$
 DELIMITER ;
 
 -- --------------------------------------------------------
