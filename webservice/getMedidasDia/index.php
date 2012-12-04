@@ -1,7 +1,7 @@
 <?php 
 
 
-/*switch($_SERVER['REQUEST_METHOD']){
+switch($_SERVER['REQUEST_METHOD']){
    case 'GET':
 	getGFXAccount();
     break;
@@ -13,15 +13,16 @@
     break;
 }
 
-function getGFXAccount(){	*/
-	$input = false;
+function getGFXAccount(){	
+	$input = true;
 	
 	//Gets the input
 	if(isset($_GET["houseId"])){
 		$houseId = $_GET["houseId"];
-		$input = true;
-	}
-	
+	} else { $input = false;}
+	if(isset($_GET["date"])){
+		$date = $_GET["date"];
+	} else { $input = false;}
 	
 	
 	if(!$input){//Erro no input, retorna erro
@@ -39,7 +40,11 @@ function getGFXAccount(){	*/
 		@mysql_select_db($database) or die('Unable to select database');
 		mysql_query("SET NAMES 'utf8'");
 	
-		$query = "SELECT * FROM medidas_".$houseId;
+		$time = strtotime ($date);
+		$time2 = $time + (60*60*24) - 1;
+	
+		$query = "SELECT * FROM medidas WHERE house_id = ".$houseId." AND inicio_medida BETWEEN  FROM_UNIXTIME(".$time.") AND  FROM_UNIXTIME(".$time2.")";
+		//echo $query;
 		$result = mysql_query($query);
 		if($result  && mysql_num_rows($result) > 0){
 			$num_rows = mysql_num_rows($result);
@@ -53,8 +58,8 @@ function getGFXAccount(){	*/
 				$medida_pot = $row["consumo"];
 				$medida_inicio = $row["inicio_medida"];
 				
-				$medida["c"] = $medida_pot;
-				$medida["i"] = $medida_inicio;
+				$medida["consumo"] = $medida_pot;
+				$medida["inicio"] = $medida_inicio;
 				
 				$medidas[] = $medida;
 			}
@@ -71,5 +76,5 @@ function getGFXAccount(){	*/
 			
 		echo json_encode($response);
 	}
-//}
+}
 ?>
