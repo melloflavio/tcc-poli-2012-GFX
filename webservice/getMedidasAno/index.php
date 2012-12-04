@@ -42,9 +42,9 @@ function getGFXAccount(){
 	
 		$time = strtotime ($date);
 		$time2 = strtotime(date('Y', $time).'-12-31');
-		echo ($time."     --     ");
-		echo ($time2."     --     ");
-		echo (date('Y-m-d', $time2)."     --     ");
+		//echo ($time."     --     ");
+		//echo ($time2."     --     ");
+		//echo (date('Y-m-d', $time2)."     --     ");
 	
 		$query = "SELECT * FROM medidas_mes WHERE house_id = ".$houseId." AND mes_medida BETWEEN  FROM_UNIXTIME(".$time.") AND  FROM_UNIXTIME(".$time2.")";
 		//echo $query."          \n\n        ";
