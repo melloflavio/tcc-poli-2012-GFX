@@ -235,17 +235,23 @@ private ArrayAdapter<String> mSpinnerAdapter;
     	String logradouro;
     	String cidade;
     	String estado;
+    	String consumoDia;
+    	String consumoMes;
     	
     	try {
 			nomeCasa = houseInfo.getString("nomeCasa");
 			logradouro = houseInfo.getString("logradouro");
 	    	cidade = houseInfo.getString("cidade");
 	    	estado = houseInfo.getString("estado");
+	    	consumoDia = houseInfo.getString("consumo_dia");
+	    	consumoMes = houseInfo.getString("consumo_mes");
 		} catch (JSONException e) {
 			nomeCasa = null;
 			logradouro = null;
 	    	cidade = null;
 	    	estado = null;
+	    	consumoDia = null;
+	    	consumoMes = null;
 			e.printStackTrace();
 		}
     	
@@ -255,6 +261,8 @@ private ArrayAdapter<String> mSpinnerAdapter;
     		r.setCidade(cidade);
     		r.setEstado(estado);
     		r.setHouseId(houseId);
+    		r.set_consumoDia(consumoDia);
+    		r.set_consumoMes(consumoMes);
     		
     		mResidencias.add(r);
     		mHouseNames.add(nomeCasa);
@@ -269,6 +277,8 @@ private ArrayAdapter<String> mSpinnerAdapter;
     	((TextView)findViewById(R.id.myProperties_houseAddr)).setText(r.getLogradouro());
     	((TextView)findViewById(R.id.myProperties_houseCity)).setText(r.getCidade());
     	((TextView)findViewById(R.id.myProperties_houseState)).setText(r.getEstado());
+    	((TextView)findViewById(R.id.myProperties_consumoDia)).setText(r.get_consumoDia());
+    	((TextView)findViewById(R.id.myProperties_consumoMes)).setText(r.get_consumoMes());
     }
     
     private void goToHomeScreen(){

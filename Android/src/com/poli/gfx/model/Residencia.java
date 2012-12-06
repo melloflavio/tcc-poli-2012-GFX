@@ -21,6 +21,8 @@ public class Residencia {
 	private String _logradouro;
 	private String _cidade;
 	private String _estado;
+	private String _consumoDia;
+	private String _consumoMes;
 	private ArrayList<Medida> _medidas;
 	private ComparadorMedidas _comparador;
 	
@@ -60,8 +62,29 @@ public class Residencia {
 		this._estado = estado;
 	}
 	
-	public void adicionarMedida(double potencia, Calendar inicio, Calendar termino){
-		_medidas.add(new Medida(potencia, inicio, termino));
+	public String get_consumoDia() {
+		return _consumoDia;
+	}
+
+	public void set_consumoDia(String _consumoDia) {
+		this._consumoDia = _consumoDia;
+	}
+
+	public String get_consumoMes() {
+		return _consumoMes;
+	}
+
+	public void set_consumoMes(String _consumoMes) {
+		this._consumoMes = _consumoMes;
+	}
+	
+	public void adicionarMedida(double consumo, Calendar inicio, Calendar termino){
+		_medidas.add(new Medida(consumo, inicio, termino));
+		Collections.sort(_medidas, _comparador);
+	}
+	
+	public void adicionarMedida(double consumo, Calendar inicio){
+		_medidas.add(new Medida(consumo, inicio));
 		Collections.sort(_medidas, _comparador);
 	}
 	
@@ -83,7 +106,7 @@ public class Residencia {
 			series.addFirst(new Double(m.getHoraDoDiaInicio()),new Double(m.getConsumoEmkWh()));
 		}
 //		SimpleXYSeries series = new SimpleXYSeries(horas, consumo, _nomeCasa);
-//		Log.d(TAG, String.format("Gerando dados casa= %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
+		Log.d(TAG, String.format("Gerando dados casa dia = %s tamanho = %d", _nomeCasa, medidasDoDia.size()));
 		return series;
 	}
 	

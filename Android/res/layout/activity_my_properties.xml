@@ -67,7 +67,7 @@
 		            
 		            <TextView 
 		                style="@style/Widget.TextView.MyProperties.Label"
-		                android:text="Endereço"/>
+		                android:text="Endereço:"/>
 		            
 		            <TextView
 		                android:id="@+id/myProperties_houseAddr"
@@ -84,7 +84,7 @@
 		            
 		            <TextView 
 		                style="@style/Widget.TextView.MyProperties.Label"
-		                android:text="Cidade"/>
+		                android:text="Cidade:"/>
 		            
 		            <TextView
 		                android:id="@+id/myProperties_houseCity"
@@ -101,7 +101,7 @@
 		            
 		            <TextView 
 		                style="@style/Widget.TextView.MyProperties.Label"
-		                android:text="Estado"/>
+		                android:text="Estado:"/>
 		            
 		            <TextView
 		                android:id="@+id/myProperties_houseState"
@@ -117,7 +117,7 @@
 		            android:gravity="center"
 		            android:textStyle="bold"
 		            android:textSize="35dp"
-		            android:text="Consumo Médio"/>
+		            android:text="Consumo Atual"/>
 		        
 		        <!-- Consumo Diário-->
 		        <LinearLayout 
@@ -129,29 +129,14 @@
 		            
 		            <TextView 
 		                style="@style/Widget.TextView.MyProperties.Label"
-		                android:text="Diário:"/>
+		                android:text="Hoje:"/>
 		            
-		            <TextView 
+		            <TextView
+		                android:id="@+id/myProperties_consumoDia"
 		                style="@style/Widget.TextView.MyProperties.Value"
-		                android:text="15kWh/Dia"/>
+		                android:text=""/>
 		        </LinearLayout>
 		        
-		        <!-- Semanal -->
-		        <LinearLayout 
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"
-		            android:orientation="horizontal"
-		            android:layout_marginTop="15dp"
-		            android:layout_marginLeft="15dp">
-		            
-		            <TextView 
-		                style="@style/Widget.TextView.MyProperties.Label"
-		                android:text="Semanal:"/>
-		            
-		            <TextView 
-		                style="@style/Widget.TextView.MyProperties.Value"
-		                android:text="75 kWh/Semana"/>
-		        </LinearLayout>
 		        
 		        <!-- Mensal -->
 		        <LinearLayout 
@@ -163,11 +148,12 @@
 		            
 		            <TextView 
 		                style="@style/Widget.TextView.MyProperties.Label"
-		                android:text="Mensal:"/>
+		                android:text="Este Mês:"/>
 		            
 		            <TextView 
+		                android:id="@+id/myProperties_consumoMes"
 		                style="@style/Widget.TextView.MyProperties.Value"
-		                android:text="2000 kWh/Mes"/>
+		                android:text="1000 kWh"/>
 		        </LinearLayout>
 		        
 		        

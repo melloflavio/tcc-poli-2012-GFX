@@ -47,7 +47,7 @@
         <!-- Medidas -->
         <activity
             android:name=".main.ConsumoActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="sensorLandscape"/>
         
         <activity
             android:name=".main.SignupActivity"

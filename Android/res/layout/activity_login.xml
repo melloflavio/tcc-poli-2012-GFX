@@ -86,7 +86,8 @@
 				        android:layout_marginLeft="20dp"
 				        android:textSize="24dp"
 				        android:text="@string/login_forgot_password"
-				        android:onClick="forgotPasswordButtonClicked"/>
+				        android:onClick="forgotPasswordButtonClicked"
+				        android:visibility="gone"/>
 		            
 		            <Button
 		                style="@style/Widget.Button.Blue"

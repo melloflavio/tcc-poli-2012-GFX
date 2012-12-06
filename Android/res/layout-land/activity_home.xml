@@ -56,9 +56,10 @@
 			            style="@style/Widget.Button.SquareBlue"
 			            android:layout_width="400dp"
 			            android:layout_height="80dp"
-			            android:text="Opções"
+			            android:text="Sair"
 			            android:textSize="30dp"
-			            android:layout_gravity="center"/>
+			            android:layout_gravity="center"
+			            android:onClick="sairButtonClicked"/>
 		            
 		            <!-- Espaçador -->
 		            <View

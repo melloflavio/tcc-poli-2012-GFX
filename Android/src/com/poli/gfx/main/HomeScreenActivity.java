@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.poli.gfx.R;
+import com.poli.gfx.util.SharedPreferencesAdapter;
 
 public class HomeScreenActivity extends Activity {
 
@@ -46,6 +47,13 @@ public class HomeScreenActivity extends Activity {
     
     public void medidasButtonClicked(View v){
     	Intent i = new Intent(this, ConsumoActivity.class);
+    	startActivity(i);
+    }
+    
+    public void sairButtonClicked(View v){
+    	SharedPreferencesAdapter.clearSharedPreferences(getApplicationContext());
+    	Intent i = new Intent(this, MainActivity.class);
+    	i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	startActivity(i);
     }
 

@@ -71,7 +71,13 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        if (SharedPreferencesAdapter.getStringFromSharedPreferences(SharedPreferencesAdapter.USER_ID_KEY, getApplicationContext()) != null){
+        
+	}
+	
+	protected void onResume(){
+		super.onResume();
+		
+		if (SharedPreferencesAdapter.getStringFromSharedPreferences(SharedPreferencesAdapter.USER_ID_KEY, getApplicationContext()) != null){
         	Intent i = new Intent(this, HomeScreenActivity.class);
     		startActivity(i);
         }
