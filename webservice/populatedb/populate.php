@@ -8,15 +8,14 @@
 
 //include SQL connection data. EDIT config.php!!!
 include("config.php");
+include("calculafatura.php");
 ini_set('max_execution_time', 600);
 
 // SETUP
 
 $currenttime = time();
-$potencia = 30;
+$potencia = 550;
 $timestamp = strtotime($_POST['date']); 
-
-
 
 echo "<h1>Programa de Inserção de Dados</h1>";
 echo "<h3>Inserindo a partir de: ".$_POST['date']."</h3>";
@@ -38,15 +37,21 @@ if(!$db) {
 
 // ROTINA DE INSERÇÃO DE DADOS
 
+echo "<table border=\"2\" align=\"center\" cellpadding=\"10\" cellspacing=\"10\">";
+echo "<tr><th>Timestamp</th><th>Energia</th><th>Preço</th><th>Posto</th></tr>";
 while ($timestamp <= $currenttime){
-	//generate new power value
+	
+	//gerar novo valor de energia em W
 	$fator_potencia = 0.9732*(1+fprand(0,0.03,3)-0.015);
 	$potencia = generatevalue($timestamp,$potencia);
-	$potencia = number_format($potencia, '3');
+	//$potencia = number_format($potencia, '3');
+	$intervalo = '15';
+	$potencia_wh = $potencia*$intervalo/60;
+	
 	//insert into DB
-	//echo $timestamp."<br/>";
 	$sqltime = date("Y-m-d H:i:s",$timestamp);
 	//$qry = "INSERT INTO medidas_(consumo,fator_potencia,tipo_tarifa,inicio_medida) VALUES('$potencia','$fator_potencia','1','$sqltime')";
+	$fatura_parcial = calcula_fatura('1','15',$timestamp, $fator_potencia, $potencia_wh);
 	$qry="INSERT INTO `tcc_gfx`.`medidas`
 			(`house_id`,
 			`inicio_medida`,
@@ -58,14 +63,34 @@ while ($timestamp <= $currenttime){
 			(
 			'1',
 			'$sqltime',
-			'15',
-			'$potencia',
+			'$intervalo',
+			'$potencia_wh',
 			'$fator_potencia',
-			'$fator_potencia*$potencia*0.25'
+			'$fatura_parcial'
 			);";
 	$result = @mysql_query($qry);
 	if ($result){
-		echo date("Y-m-d H:i:s",$timestamp)."  medida: ".number_format($potencia,2)." Wh  inserido com sucesso!!!<br/>";
+			$hour=date('H',$timestamp);
+				switch ($hour) {
+					//ponta
+					case ($hour=='18'||$hour=='19'||$hour=='20'):
+			    		$tarifa="ponta";
+			 		break;
+			  		//intermediário
+			 		case ($hour=='17'||$hour=='21'):
+			    		$tarifa="intermediária";
+			  		break;
+			  		//ponta
+			 		default:
+			    		$tarifa="fora de ponta";
+			  		break;
+		}
+		echo "<tr>";
+		echo "<td>".date("Y-m-d H:i:s",$timestamp)."</td>";
+		echo "<td>".number_format($potencia,2)."Wh</td>";
+		echo "<td>".number_format($fatura_parcial,6)."R$</td>";
+		echo "<td>".$tarifa."</td>";
+		echo "</tr>";
 	}
 	else
 	{
@@ -76,6 +101,7 @@ while ($timestamp <= $currenttime){
 	$timestamp = $timestamp + 60*15;
 	
 }
+echo "</table>";
 
 //FUNCTIONS 
 
@@ -94,7 +120,7 @@ function generatevalue ($timestamp,$oldvalue){
 	$now = date("Gi",$timestamp); // gera hora atual
 	//$factor = 1 + fprand(0,0.15,3); //gera fator randomico para macroeventos
 	if ($oldvalue == 0){
-		$oldvalue = 30 * (1 + fprand(0,0.2,3) - 0.10);
+		$oldvalue = 300 * (1 + fprand(0,0.2,3) - 0.10);
 	}
 
 	if ($now > 000 && $now <= 200){
@@ -102,11 +128,11 @@ function generatevalue ($timestamp,$oldvalue){
 	}
 	elseif ($now > 200 && $now <= 430)
 	{
-		$potencia = 20*(1 + fprand(0.87,1.13,3)-0.65); // +-13%
+		$potencia = 300*(1 + fprand(0.87,1.13,3)-0.65); // +-13%
 	}
 	elseif ($now > 430 && $now <= 600)
 	{
-		$potencia = 25*( 1+ fprand(0.87,1.13,3)-0.65); // +-13%
+		$potencia = 450*( 1+ fprand(0.87,1.13,3)-0.65); // +-13%
 	}
 	elseif ($now > 600 && $now <= 830)
 	{
