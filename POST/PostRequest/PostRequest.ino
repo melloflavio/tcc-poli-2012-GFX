@@ -9,7 +9,7 @@
 #define WIRELESS_MODE_ADHOC	2
 
 // Wireless configuration parameters ----------------------------------------
-unsigned char local_ip[] = {192,168,1,2};	// IP address of WiShield
+unsigned char local_ip[] = {192,168,1,200};	// IP address of WiShield
 unsigned char gateway_ip[] = {192,168,1,1};	// router or gateway IP address
 unsigned char subnet_mask[] = {255,255,255,0};	// subnet mask for the local network
 const prog_char ssid[] PROGMEM = {"mellocel"};		// max 32 bytes
@@ -39,7 +39,7 @@ unsigned char security_passphrase_len;
 
 // Function that prints data from the server
 void printData(char* data, int len) {
-  
+  Serial.print("--- Received!");
   // Print the data returned by the server
   // Note that the data is not null-terminated, may be broken up into smaller packets, and 
   // includes the HTTP header. 
@@ -54,7 +54,7 @@ uint8 ip[] = {192,168,1,143};
 
 // A request that gets the latest METAR weather data for LAX
 //GETrequest getWeather(ip, 80, "192.168.1.143", "/TCC/post.php");
-POSTrequest postToServer(ip, 80, "192.168.1.143", "/TCC/post.php", postBody);
+POSTrequest postToServer(ip, 80, "192.168.1.143", "/TCC/tcc-poli-2012-GFX/post.php", postBody);
 
 
 void setup() {
@@ -83,9 +83,9 @@ void loop(){
     postToServer.submit();    
     Serial.print("posted \n\n");
     // Get another update one hour from now
-    updateTime += 1000 * 60 * 60;
+    updateTime += 1000 * 30;
   }
-  
+  Serial.print(".");
   // Run WiServer
   WiServer.server_task();
  
@@ -95,4 +95,5 @@ void loop(){
 void postBody ()
 {
   WiServer.print("{\"brilha\":\"muito\"}"); 
+  Serial.print("--- Sent!");
 }

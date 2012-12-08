@@ -2,13 +2,58 @@
 Projeto Medida
  */
 
-#define BURST 400 //460 ta funcionando sem os maiores prints
-#define SEC 60 // number os seconds to calculate power
+#define BURST 300 //460 ta funcionando sem os maiores prints
+#define SEC 5 // number os seconds to calculate power
 #define MBLOCK 3
 #define MINUTES 15
 #define CONVCTE 476.19048 // conversion constant to get the real values in the input of the system
 
 #include <Time.h>
+
+//*********************************
+//Configuração POST
+
+#include <WiServer.h>
+
+//Parametros globais a ser enviados
+unsigned long postStartStamp;
+unsigned long postLength;
+float postActivePower;
+float postFP;
+
+#define WIRELESS_MODE_INFRA	1
+#define WIRELESS_MODE_ADHOC	2
+
+// Wireless configuration parameters ----------------------------------------
+unsigned char local_ip[] = {192,168,1,201};	// IP address of WiShield
+unsigned char gateway_ip[] = {192,168,1,1};	// router or gateway IP address
+unsigned char subnet_mask[] = {255,255,255,0};	// subnet mask for the local network
+const prog_char ssid[] PROGMEM = {"mellocel"};		// max 32 bytes
+
+unsigned char security_type = 0;	// 0 - open; 1 - WEP; 2 - WPA; 3 - WPA2
+
+// WPA/WPA2 passphrase
+const prog_char security_passphrase[] PROGMEM = {};	// max 64 characters
+
+// WEP 128-bit keys
+// sample HEX keys
+prog_uchar wep_keys[] PROGMEM = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d,	// Key 0
+				  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,	// Key 1
+				  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,	// Key 2
+				  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00	// Key 3
+				};
+
+// setup the wireless mode
+// infrastructure - connect to AP
+// adhoc - connect to another WiFi device
+unsigned char wireless_mode = WIRELESS_MODE_INFRA;
+
+uint8 ip[] = {192,168,1,143};
+
+POSTrequest postToServer(ip, 80, "192.168.1.143", "/TCC/tcc-poli-2012-GFX/post.php", postBody);
+
+// Fim Configuração POST
+//***************************************
 
 struct Medida
 {
@@ -51,8 +96,18 @@ void setup() {
 
   Serial.begin(57600);
   
+  //Post
+  // Initialize WiServer (we'll pass NULL for the page serving function since we don't need to serve web pages) 
+  WiServer.init(NULL);
+  // Enable Serial output and ask WiServer to generate log messages (optional)
+  WiServer.enableVerboseMode(true);
+  // Have the processData function called when data is returned by the server
+  postToServer.setReturnFunc(printData);
+//  Serial.print
+  
 }
 
+boolean closedConnection = true;
 // the loop routine runs over and over again forever:
 void loop() {
 //  insertNewMedida(0.1,0.1,1);
@@ -61,7 +116,19 @@ void loop() {
 //  Serial.print(reponse);
 //  Serial.print("\n");
 //  while(true){Serial.print("\n"); Serial.print(CONVCTE, 6);}
+if (closedConnection){
+  closedConnection = false;
   getRMS();
+  
+  postStartStamp = startStamp;
+  postLength = 1;
+  postActivePower = consPow[0].activePower;
+  postFP = consPow[0].fp;
+  
+  postToServer.submit();
+}
+  
+  WiServer.server_task();
 }
 
 
@@ -338,7 +405,11 @@ void getRMS() {
   Serial.print(consPow[i].fp, 5);
   Serial.print("\n");
   
-  while(true) {}
+  
+  
+//  encodeJSON(startStamp, endStamp, consPow[i].activePower, consPow[i].fp);
+  
+//  while(!sent) {WiServer.server_task();}
   
 }
 
@@ -452,3 +523,102 @@ int getListSize(){
 //  return lSize;
 }
 
+
+
+
+
+
+
+
+////// Parte de POST
+
+//Já adicionado acima
+//#include <WiServer.h>
+
+//Parametros globais a ser enviados
+//unsigned long postStartStamp;
+//unsigned long postLength;
+//float postActivePower;
+//float postFP;
+
+/*
+#define WIRELESS_MODE_INFRA	1
+#define WIRELESS_MODE_ADHOC	2
+
+// Wireless configuration parameters ----------------------------------------
+unsigned char local_ip[] = {192,168,1,2};	// IP address of WiShield
+unsigned char gateway_ip[] = {192,168,1,1};	// router or gateway IP address
+unsigned char subnet_mask[] = {255,255,255,0};	// subnet mask for the local network
+const prog_char ssid[] PROGMEM = {"mellocel"};		// max 32 bytes
+
+unsigned char security_type = 0;	// 0 - open; 1 - WEP; 2 - WPA; 3 - WPA2
+
+// WPA/WPA2 passphrase
+const prog_char security_passphrase[] PROGMEM = {};	// max 64 characters
+
+// WEP 128-bit keys
+// sample HEX keys
+prog_uchar wep_keys[] PROGMEM = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d,	// Key 0
+				  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,	// Key 1
+				  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,	// Key 2
+				  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00	// Key 3
+				};
+
+// setup the wireless mode
+// infrastructure - connect to AP
+// adhoc - connect to another WiFi device
+unsigned char wireless_mode = WIRELESS_MODE_INFRA;
+*/
+unsigned char ssid_len;
+unsigned char security_passphrase_len;
+// End of wireless configuration parameters ----------------------------------------
+
+
+// Function that prints data from the server
+void printData(char* data, int len) {
+    if(len == 0) {
+      closedConnection = true;
+    }
+
+  while (len-- > 0) {
+    Serial.print(*(data++));
+  } 
+}
+
+
+// IP Address for www.weather.gov  
+//uint8 ip[] = {192,168,1,143};
+
+// A request that gets the latest METAR weather data for LAX
+//GETrequest getWeather(ip, 80, "192.168.1.143", "/TCC/post.php");
+//POSTrequest postToServer(ip, 80, "192.168.1.143", "/TCC/tcc-poli-2012-GFX/post.php", postBody);
+
+
+// Time (in millis) when the data should be retrieved 
+//long updateTime = 0;
+
+
+void postBody ()
+{
+  WiServer.print(encodeJSON(postStartStamp, postLength, postActivePower, postFP));
+}
+
+String encodeJSON(unsigned long startStamp, unsigned long endStamp, float activePower,  float fp)
+{
+  //Medida* pAux = head;
+  float tensao;
+
+  //Inicio do json
+  String jsonResponse = "{\"id\":\"1\",\"s\":";
+  Serial.print ("Start = ");
+  Serial.print (startStamp);
+  Serial.print ("\n");
+  jsonResponse += startStamp;
+  jsonResponse +=",\"i\":"
+  jsonResponse += endStamp;
+  jsonResponse += ",\"c\":"+doubleToString(activePower)+",\"fp\":"+doubleToString(fp)+"}";
+  Serial.print("Encoded");
+  Serial.print(jsonResponse);
+//  String jsonResponse = "{\"1\":\"2\"}";
+  return jsonResponse;
+}
