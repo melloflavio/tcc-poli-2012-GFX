@@ -49,7 +49,7 @@ switch($_SERVER['REQUEST_METHOD']){
 		$powerFactor = $input["fp"];
 		error_log("Fator de Potência = ".$powerFactor."\r\n", 3, "/wamp/www/TCC/log_do_tcc.log");
 		$id = $input["id"];
-		error_log("Id da Casa = ".$id."\r\n", 3, "/wamp/www/TCC/log_do_tcc.log");
+		//error_log("Id da Casa = ".$id."\r\n", 3, "/wamp/www/TCC/log_do_tcc.log");
 	}
    //$query = "INSERT INTO teste (text) VALUES ('".$text."')";
 	//$result = mysql_query($query);
@@ -66,7 +66,8 @@ $arduino_energia=$consumption;
 $arduino_interval=$length;
 $arduino_fp=$powerFactor;
 $arduino_house_id=$id;
-$arduino_timestamp=$startTime;
+//$arduino_timestamp=$startTime;
+$arduino_timestamp=time();
 
 //recebe potencia em Wh
 function calcula_fatura($house_id, $interval, $timestamp, $fp, $energia){
@@ -77,9 +78,9 @@ function calcula_fatura($house_id, $interval, $timestamp, $fp, $energia){
 		$row = mysql_fetch_assoc($result);
 		$distribuidora=$row["distribuidora_id"];
 		$tipo_tarifa=$row["tipo_tarifa"];
-		echo "Casa:".$house_id."<br/>";
-		echo "Distribuidora:".$distribuidora."<br/>";
-		echo "Tarifa:".$tipo_tarifa."<br/>";		
+		//echo "Casa:".$house_id."<br/>";
+		//echo "Distribuidora:".$distribuidora."<br/>";
+		//echo "Tarifa:".$tipo_tarifa."<br/>";		
 	}
 	else die("Nenhuma distribuidora encontrada para a casa fornecida. house_id=".$house_id);
 	
@@ -98,10 +99,10 @@ function calcula_fatura($house_id, $interval, $timestamp, $fp, $energia){
 		$tarifa_ponta=$row["tarifa_ponta"];
 		$tarifa_foraponta=$row["tarifa_foraponta"];
 		$tarifa_int=$row["tarifa_intermediaria"];
-		echo "Tarifa Convencional: ".$tarifa_conv."<br/>";
-		echo "Tarifa Ponta: ".$tarifa_ponta."<br/>";
-		echo "Tarifa Fora Ponta: ".$tarifa_foraponta."<br/>";
-		echo "Tarifa Intermediária: ".$tarifa_int."<br/>";		
+		//echo "Tarifa Convencional: ".$tarifa_conv."<br/>";
+		//echo "Tarifa Ponta: ".$tarifa_ponta."<br/>";
+		//echo "Tarifa Fora Ponta: ".$tarifa_foraponta."<br/>";
+		//echo "Tarifa Intermediária: ".$tarifa_int."<br/>";		
 	}
 	else die("Nenhuma distribuidora encontrada. distribuidora_id=".$distribuidora);
 	
@@ -132,7 +133,8 @@ function calcula_fatura($house_id, $interval, $timestamp, $fp, $energia){
 }
 //$energia_wh=$arduino_energia*$arduino_interval/60;
 $fatura_parcial = calcula_fatura($arduino_house_id,$arduino_interval,$arduino_timestamp, $arduino_fp, $arduino_energia);
-echo "Fatura Parcial: ".$fatura_parcial."R$";
+//echo "Fatura Parcial: ".$fatura_parcial."R$";
+$sqltime = date("Y-m-d H:i:s",$arduino_timestamp);
 $qry="
 INSERT INTO `tcc_gfx`.`medidas`
 	(`house_id`,
@@ -143,12 +145,16 @@ INSERT INTO `tcc_gfx`.`medidas`
 	`fatura_parcial_medida`)
 	VALUES
 	(
-	'$arduino_house_id'
-	'$arduino_timestamp',
+	'$arduino_house_id',
+	'$sqltime',
 	'$arduino_interval',
-	'$energia_wh',
+	'$arduino_energia',
 	'$arduino_fp',
 	'$fatura_parcial'
 	);";
+$result = mysql_query($qry);
+	if ($result){
+	echo "valor inserido com sucesso!!\n";
+	}
 echo $qry;
 ?>
