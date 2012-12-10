@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="/../FusionCharts/FusionCharts.js"></script>
+    <script type="text/javascript" src="/../FusionCharts/jquery.min.js"></script>
+    <script type="text/javascript" src="/../FusionCharts/FusionCharts.jqueryplugin.js"></script>
+    <script type="text/javascript" src="/../js/dashboard.js"></script>
+    <script>
+    $('document').ready(
+            function(){
+            	$( "input[type=submit]" )
+                .button()
+                .click(function( event ) {
+                 	var houseId = $("#form1 input[type='radio']:checked").val();
+                	var query = $("#form2 input[type='radio']:checked").val();
+                	var data = $("#datepicker").val();
+                	var date = new Date(data);
+                 	var year = date.getUTCFullYear();
+                 	var month = parseInt(date.getMonth())+1;
+                 	var day = date.getUTCDate();
+                	data = year + "-" + String(month) + "-" + day;
+                	//alert(data);
+                if (window.XMLHttpRequest)
+              	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+                	xmlhttp=new XMLHttpRequest();
+              	  }
+              	else
+              	  {// code for IE6, IE5
+              	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              	  }
+              	xmlhttp.onreadystatechange=function()
+              	  {
+              	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+              	    {
+              			var strXML = xmlhttp.responseText;
+              			var jsonObject = {
+              	                  swfUrl: "FusionCharts/Line.swf", 
+              	                  dataSource: "", 
+              	                  dataFormat: "xml", 
+              	                  width: "525", 
+              	                  height: "320", 
+              	                  id: "myChartId"
+              	            };
+              	          	jsonObject.dataSource = strXML;
+              	          	switch (query){
+              	          	case '3':
+              	          		jsonObject.swfUrl = "FusionCharts/Line.swf";
+              	          		break;
+              	          	default:
+              	          		//jsonObject.swfUrl = "FusionCharts/Line.swf";
+              	          		jsonObject.swfUrl = "FusionCharts/Column2D.swf";
+              	          	}
+              	          	//alert(strXML);
+              	    		$("#chartContainer").insertFusionCharts(jsonObject);
+              	    }
+              	  }
+              	//alert("dataprovider_"+query+".php?data="+data+"&house="+houseId);
+              	xmlhttp.open("GET","pages/dataprovider_"+query+".php?data="+data+"&house="+houseId,true);
+              	xmlhttp.send();
+                });
+            	$('#datepicker').datepicker({
+            		changeMonth: true,
+                	changeYear: true,
+            		onSelect: function(dateText, inst) { $( "input[type=submit]" ).trigger('click'); } 
+            	});
+            	$( "#check" ).button();
+            	$( "#radiogrp1" ).buttonset();
+            	//$( "#radiogrp1" ).buttonset().prop('checked',true);
+            	$( "#radiogrp2" ).buttonset().find('label').width(60);
+            	//$( "input[type=submit]" ).width(160);
+                $('input:radio').click(
+                    function(){
+                    	$( "input[type=submit]" ).trigger('click');   
+                    }
+                );
+                $('#datepicker').click(
+                  	function() { 
+                    	$( "input[type=submit]" ).trigger('click');
+                    }
+                );
+                $('input:radio[id=radio1]').click(
+                        function(){
+                        	//house='1';
+                        	//alert(+house);
+                        }
+                    );
+                $( "input[type=submit]" ).trigger('click');
+                $("#check").click(
+                	function(){
+                		//$("#label").text(this.checked ? "ON" : "OFF");
+                		if ($('#check').is(":checked"))
+                		{
+                			myInterval = setInterval(function(){$( "input[type=submit]" ).trigger('click');},5000);// it is checked
+                		}else{	
+                			window.clearInterval(myInterval);
+						//for clearing all intervals
+                		}
+                	}
+                );
+            }
+        );
+    </script>
+<style>
+ <!--
+#form1{
+	padding: 0px 5px 5px 0px;
+}
+#form2{
+	padding: 5px 5px 5px 0px;
+}
+#calendar{
+	width:60px;
+	font-size:10px;
+	padding: 5px 5px 5px 0px;
+}
+#draw{
+	padding: 5px 5px 5px 0px;
+}
+
+ -->
+ </style>
+</head>
+<body>
+	<div id=dashboard>
+		<form id=form1>
+		    <div id="radiogrp1">
+		        <input type="radio" id="radio1" name="radio" value="1" checked="checked"/><label for="radio1">Test Data</label>
+		        <input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Arduino</label>
+		    </div>
+		</form>
+		<form id=form2>
+		    <div id="radiogrp2">
+		        <input type="radio" id="radio4" name="radio" value="1"/><label for="radio4">Ano</label>
+		        <input type="radio" id="radio5" name="radio" value="2"/><label for="radio5">Mês</label>
+		        <input type="radio" id="radio6" name="radio" value="3" checked="checked"/><label for="radio6">Dia</label>
+		    </div>
+		</form>
+			<form>
+				<div id="calendar">
+					<div id="datepicker"></div>
+				</div>
+			</form>
+		<div id="draw">
+			<input type="submit" value="Demonstração" />
+			
+		</div>
+		<input type="checkbox" id="check"/><label for="check" id="label">Auto</label>
+	</div>
+	<div id="chartContainer"></div> 
+</body>
+</html>
