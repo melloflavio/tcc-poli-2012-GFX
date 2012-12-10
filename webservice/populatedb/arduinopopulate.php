@@ -12,9 +12,9 @@ ini_set('max_execution_time', 600);
 
 // SETUP
 
-$currenttime = time()+60*60*30;
+$currenttime = time()+60*60*8;
 $potencia = 550;
-$timestamp = strtotime($_POST['date']); 
+$timestamp = time(); 
 
 echo "<h1>Programa de Inserção de Dados</h1>";
 echo "<h3>Inserindo a partir de: ".$_POST['date']."</h3>";
@@ -44,13 +44,13 @@ while ($timestamp <= $currenttime){
 	$fator_potencia = 0.9732*(rand(9370000,9740000)/10000000);
 	$potencia = generatevalue($timestamp,$potencia);
 	//$potencia = number_format($potencia, '3');
-	$intervalo = '15';
+	$intervalo = '2';
 	$potencia_wh = $potencia*$intervalo/60;
 	
 	//insert into DB
 	$sqltime = date("Y-m-d H:i:s",$timestamp);
 	//$qry = "INSERT INTO medidas_(consumo,fator_potencia,tipo_tarifa,inicio_medida) VALUES('$potencia','$fator_potencia','1','$sqltime')";
-	$fatura_parcial = calcula_fatura('1',$intervalo,$timestamp, $fator_potencia, $potencia_wh);
+	$fatura_parcial = calcula_fatura('2',$intervalo,$timestamp, $fator_potencia, $potencia_wh);
 	$qry="INSERT INTO `tcc_gfx`.`medidas`
 			(`house_id`,
 			`inicio_medida`,
@@ -60,7 +60,7 @@ while ($timestamp <= $currenttime){
 			`fatura_parcial_medida`)
 			VALUES
 			(
-			'1',
+			'2',
 			'$sqltime',
 			'$intervalo',
 			'$potencia_wh',
@@ -97,7 +97,7 @@ while ($timestamp <= $currenttime){
 	}
 	//echo $result;
 	//increment time in 15 mins
-	$timestamp = $timestamp + 60*$intervalo;
+	$timestamp = $timestamp + 10;
 	
 }
 echo "</table>";
@@ -113,7 +113,7 @@ function fprand($intMin,$intMax,$intDecimals) {
 	else
 	return rand($intMin,$intMax);
 }
-$oldvalue = 500;
+$oldvalue = 50;
 //geração da curva de demanda
 function generatevalue ($timestamp,$oldvalue){
 	$now = date("Gi",$timestamp); // gera hora atual
@@ -134,7 +134,7 @@ function generatevalue ($timestamp,$oldvalue){
 	elseif ($now > 400 && $now <= 600)
 	{
 		$tchuca = rand(920000,1060000)/1000000;
-		$potencia = 500*$tchuca; // ok
+		$potencia = 50*$tchuca; // ok
 	}
 	elseif ($now > 600 && $now <= 730)
 	{
